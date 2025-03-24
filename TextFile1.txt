@@ -1,0 +1,60 @@
+1. Opis i cel programu
+	Program na podstawie danych podanych przez uzytkownika oblicza miesieczne wydatki, koszt przejechania kilometra, œrednia cenê paliwa.
+	Program korzysta z 2 struktur
+		- Auto
+		- Wpis
+
+2. Deklaracje struktur
+	Struktura powinna zawieraæ pola ró¿nych typów (np. liczby, napisy, inne struktury).
+	Przyk³ad:
+
+	struct Auto {
+		int id;
+		std::string nazwa;
+		long int przebieg;
+	};
+	struct Wpis {
+		int auto_id;
+		long int przebieg;
+		float cena;
+		float ilosc;
+		long int timestamp;
+	};
+
+3. Definicja tablicy struktur
+	Program korzysta z 2 tablic:
+		- Auta rozmiar 16
+		- Wpisy rozmiar 64
+
+4. Funkcje do operacji na strukturach i tablicach
+
+	Dodawanie Aut oraz wpisow.
+	Edycja wpisow.
+	Usuwanie wpisow oraz Aut
+
+	Funkcja autosave po kazdej edycji. (Dodawanie/Usuwanie/Edycja)
+	Funkcja cofnij po kazdej edycji. (Dodawanie/Usuwanie/Edycja)
+
+	Wyswietlanie aut, wpisow oraz statystyk
+
+	Sortowanie wyswietlania wpisow po cenie, dacie, ilosci paliwa.
+	Sortowanie wyswietlania aut po przebiegu i nazwie.
+
+	Wyszukiwanie wpisow po dacie.
+	Wyszukiwanie aut po nazwie;
+
+5. Obs³uga wejœcia/wyjœcia
+	Wczytywanie danych od u¿ytkownika (np. cin dla wartoœci wprowadzanych z klawiatury).
+	Zapisywanie i odczytywanie danych z pliku (fstream).
+
+6. Obs³uga b³êdów i zabezpieczenia
+	Sprawdzanie poprawnoœci wprowadzanych danych (np. while dla b³êdnych wartoœci).
+	Unikanie przekroczenia rozmiaru tablicy.
+	Obs³uga b³êdów plikowych.
+
+7. Menu u¿ytkownika
+	Aplikacja konsolowa z menu.
+
+8. Testowanie programu
+	Przetestowanie dzia³ania na ró¿nych przypadkach danych.
+	Sprawdzenie poprawnoœci wyników.
