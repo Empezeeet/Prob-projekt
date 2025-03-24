@@ -1,4 +1,4 @@
 #!/bin/bash
 set -e
-g++ main.cpp Manager.cpp replace.cpp -o soft;
+g++ main.cpp Manager/Manager.cpp Utils/replace.cpp AppManager/AppManager.cpp -o soft;
 ./soft;
