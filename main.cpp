@@ -27,6 +27,15 @@ void removeCarOpt(Program::Manager* manager) {
 void addLogOpt(Program::Manager* manager) {
     CLEAR;
 }
+void loadOpt(Program::Manager* manager) {
+    CLEAR;
+    std::cout << "Czy na pewno chcesz wczytac? (Y/N)\n";
+    char c;
+    std::cin >> c;
+    if (c == 'Y') {
+        manager->load();
+    }
+}
 
 int main()
 {
@@ -74,8 +83,8 @@ int main()
             break;
         }
         case '6': {
-            CLEAR;
             // load
+            loadOpt(manager);
             break;
         }
         case '7': {

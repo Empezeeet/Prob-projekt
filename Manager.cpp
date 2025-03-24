@@ -153,7 +153,7 @@ int Program::Manager::save() {
     std::ofstream file2(this->logsFile);
     if (!file2) return -2;
     for (const Wpis& log : this->_logs) {
-        file2 << log.auto_id << " " << log.cena << " " << log.ilosc << " " << log.przebieg << "\n";
+        file2 << log.id << " " <<log.auto_id << " " << log.cena << " " << log.ilosc << " " << log.przebieg << "\n";
     }
     file2.close();
     return 0;
@@ -161,15 +161,34 @@ int Program::Manager::save() {
 
 int Program::Manager::load()
 {
-    //TODO: load from file
+    // TODO: not tested;
     std::ifstream file(this->carsFile);
     if (!file) return -1;
+    this->_cars.fill({});
     Program::Auto car;
+    int count = 0;
     while (file >> car.id) {
         file >> car.nazwa;
         file >> car.przebieg;
-        
-        
+        this->_cars[count] = car;
+        count++;
     }
+    this->_carCount = count;
+    file.close();
+    // load logs from file
+    std::ifstream logFile(this->logsFile);
+    if (!logFile) return -1;
+    this->_logs.fill({});
+    Program::Wpis log;
+    count = 0;
+    while (logFile >> log.id) {
+        logFile >> log.auto_id;
+        logFile >> log.cena;
+        logFile >> log.ilosc;
+        logFile >> log.przebieg;
+        this->_logs[count] = log;
+        count++;
+    } 
+    this->_logCount = count;
     return 0;
 }
