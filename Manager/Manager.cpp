@@ -180,6 +180,7 @@ int Program::Manager::load()
     while (file >> car.id) {
         file >> car.nazwa;
         file >> car.przebieg;
+        car.nazwa = replaceString(car.nazwa, '_', ' ');
         this->_cars[count] = car;
         count++;
     }

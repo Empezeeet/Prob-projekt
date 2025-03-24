@@ -1,12 +1,12 @@
 1. Opis i cel programu
-	Program na podstawie danych podanych przez uzytkownika oblicza miesieczne wydatki, koszt przejechania kilometra, œrednia cenê paliwa.
+	Program na podstawie danych podanych przez uzytkownika oblicza miesieczne wydatki, koszt przejechania kilometra, ï¿½rednia cenï¿½ paliwa.
 	Program korzysta z 2 struktur
 		- Auto
 		- Wpis
 
 2. Deklaracje struktur
-	Struktura powinna zawieraæ pola ró¿nych typów (np. liczby, napisy, inne struktury).
-	Przyk³ad:
+	Struktura powinna zawieraï¿½ pola rï¿½nych typï¿½w (np. liczby, napisy, inne struktury).
+	Przykï¿½ad:
 
 	struct Auto {
 		int id;
@@ -28,14 +28,14 @@
 
 4. Funkcje do operacji na strukturach i tablicach
 
-	Dodawanie Aut oraz wpisow.
+	Dodawanie Aut oraz wpisow. T
 	Edycja wpisow.
-	Usuwanie wpisow oraz Aut
+	Usuwanie wpisow oraz Aut. T
 
-	Funkcja autosave po kazdej edycji. (Dodawanie/Usuwanie/Edycja)
+	Funkcja autosave po kazdej edycji. (Dodawanie/Usuwanie/Edycja). T
 	Funkcja cofnij po kazdej edycji. (Dodawanie/Usuwanie/Edycja)
 
-	Wyswietlanie aut, wpisow oraz statystyk
+	Wyswietlanie aut, wpisow oraz statystyk (2/3)T
 
 	Sortowanie wyswietlania wpisow po cenie, dacie, ilosci paliwa.
 	Sortowanie wyswietlania aut po przebiegu i nazwie.
@@ -43,18 +43,18 @@
 	Wyszukiwanie wpisow po dacie.
 	Wyszukiwanie aut po nazwie;
 
-5. Obs³uga wejœcia/wyjœcia
-	Wczytywanie danych od u¿ytkownika (np. cin dla wartoœci wprowadzanych z klawiatury).
+5. Obsï¿½uga wejï¿½cia/wyjï¿½cia
+	Wczytywanie danych od uï¿½ytkownika (np. cin dla wartoï¿½ci wprowadzanych z klawiatury).
 	Zapisywanie i odczytywanie danych z pliku (fstream).
 
-6. Obs³uga b³êdów i zabezpieczenia
-	Sprawdzanie poprawnoœci wprowadzanych danych (np. while dla b³êdnych wartoœci).
+6. Obsï¿½uga bï¿½ï¿½dï¿½w i zabezpieczenia
+	Sprawdzanie poprawnoï¿½ci wprowadzanych danych (np. while dla bï¿½ï¿½dnych wartoï¿½ci).
 	Unikanie przekroczenia rozmiaru tablicy.
-	Obs³uga b³êdów plikowych.
+	Obsï¿½uga bï¿½ï¿½dï¿½w plikowych.
 
-7. Menu u¿ytkownika
+7. Menu uï¿½ytkownika
 	Aplikacja konsolowa z menu.
 
 8. Testowanie programu
-	Przetestowanie dzia³ania na ró¿nych przypadkach danych.
-	Sprawdzenie poprawnoœci wyników.
+	Przetestowanie dziaï¿½ania na rï¿½nych przypadkach danych.
+	Sprawdzenie poprawnoï¿½ci wynikï¿½w.
