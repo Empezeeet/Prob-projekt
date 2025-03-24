@@ -1,6 +1,9 @@
 
 #include "Manager.h"
 
+
+
+
 void Program::Manager::autoSave() {
 	if (!this->_autosave) return;
     this->save();

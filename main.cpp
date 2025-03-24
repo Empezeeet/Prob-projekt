@@ -4,9 +4,8 @@ int main()
 {
 
     Program::AppManager* app = new Program::AppManager();
-    
-    
     char opt;
+    
     
     do  {
         app->displayMenu();

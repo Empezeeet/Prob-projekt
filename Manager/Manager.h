@@ -1,6 +1,13 @@
 #ifndef MANAGER_H
 #define MANAGER_H
 
+#if _WIN32
+#define carSaveFilePath "C:\\cars.txt"
+#define logSaveFilePath "C:\\logs.txt"
+#else
+#define carSaveFilePath "build/save/cars.txt"
+#define logSaveFilePath "build/save/logs.txt"
+#endif
 
 
 
@@ -11,6 +18,10 @@
 #include <iostream>
 #include <typeinfo>
 #include "../Utils/replace.h"
+
+
+
+
 namespace Program {
     struct Auto {
         int id;
@@ -35,8 +46,8 @@ namespace Program {
         std::array<Wpis, 64> _logs = {};
         int _logCount = 0;
         bool _autosave = true;
-        std::string carsFile = "C:\\auta.txt";
-        std::string logsFile = "C:\\wpisy.txt";
+        std::string carsFile = carSaveFilePath;
+        std::string logsFile = logSaveFilePath;
 
 
 

@@ -74,3 +74,11 @@ void Program::AppManager::toggleAutosave() {
     CLEAR;
     this->manager->toggleAutosave();
 }
+void Program::AppManager::showAllLogs() {
+    CLEAR;
+    this->manager->printLogs();
+}
+void Program::AppManager::showAllCars() {
+    CLEAR;
+    this->manager->printCars();
+}
