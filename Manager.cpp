@@ -90,8 +90,14 @@ void Program::Manager::printCars()
 }
 void Program::Manager::printLogs()
 {
+    
+    if (this->_logCount == 0) {
+        std::cout << "Brak wpisów!\n";
+        return;
+    }
     std::cout << "|-------------\n";
     for (const auto& log : this->_logs) {
+        
         std::cout << "[ DATA WPISU: " << log.timestamp << "\t\n";
         std::cout << "[ NAZWA AUTA: " << this->findCar(log.auto_id)->nazwa << "\t\n";
         std::cout << "[ Ilosc: " << log.ilosc << "\t\n";
@@ -146,14 +152,15 @@ int Program::Manager::save() {
     this->defragmentation();
     std::ofstream file(this->carsFile);
     if (!file) return -1;
+
     for (const Auto& car : this->_cars) {
-        file << car.id << " " << car.nazwa << " " << car.przebieg << '\n';
+        file << car.id << " " << replaceString(car.nazwa, ' ', '_') << " " << car.przebieg << '\n';
     }
     file.close();
     std::ofstream file2(this->logsFile);
     if (!file2) return -2;
     for (const Wpis& log : this->_logs) {
-        file2 << log.id << " " <<log.auto_id << " " << log.cena << " " << log.ilosc << " " << log.przebieg << "\n";
+        file2 << log.id << " " << log.auto_id << " " << log.cena << " " << log.ilosc << " " << log.przebieg << "\n";
     }
     file2.close();
     return 0;

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "Manager.h"
+
 #if _WIN32
 #define CLEAR system("cls")
 #else
@@ -13,27 +14,45 @@ void addCarOpt(Program::Manager* manager) {
     Program::Auto newCar;
     std::cout << "Podaj nazwe auta: ";
     std::cin.ignore(1000, '\n');
-    std::cin >> newCar.nazwa; // TODO: it's not working with spaces;
+    std::getline(std::cin, newCar.nazwa);
     std::cout << "Podaj przebieg w kilometrach: ";
-    std::cin >> newCar.przebieg;
+    do {
+        std::cin >> newCar.przebieg;
+    } while (newCar.przebieg < 0);
     newCar.id = 0;
 
 
     manager->addCar(newCar);
 }
 void removeCarOpt(Program::Manager* manager) {
-    CLEAR;
+    CLEAR; // TODO: finish
 }
 void addLogOpt(Program::Manager* manager) {
-    CLEAR;
+    CLEAR; // TODO: finish
 }
 void loadOpt(Program::Manager* manager) {
     CLEAR;
-    std::cout << "Czy na pewno chcesz wczytac? (Y/N)\n";
+    std::cout << "Czy na pewno chcesz wczytac zapis? Nadpisze on obecne dane. (Y/N)\n";
     char c;
     std::cin >> c;
     if (c == 'Y') {
         manager->load();
+    }
+}
+void saveOpt(Program::Manager* manager) {
+    CLEAR;
+    manager->save();
+    std::cout << "Zapisano dane.\n";
+}
+void exitOpt(char* opt) {
+    CLEAR;
+    std::cout << "Czy na pewno chcesz wyjsc? (Y/N)\n";
+    char c;
+    std::cin >> c;
+    if (c == 'Y') {
+        *opt = 'E';
+    } else {
+        *opt = 'A';
     }
 }
 
@@ -60,49 +79,45 @@ int main()
         std::cout << "[------------------]\n";
         std::cin >> opt;
         switch (opt) {
-        case '1': {
+        case '1': { // add car
             addCarOpt(manager);
             break;
         }
-        case '2': {
+        case '2': { // remove car
             removeCarOpt(manager);
             break;
         }
-        case '3': {
+        case '3': { // add new log to car;
             addLogOpt(manager);
             break;
         }
-        case '4': {
+        case '4': { // print all cars
             CLEAR;
             manager->printCars();
             break;
         }
-        case '5': {
+        case '5': { // print all fuel logs
             CLEAR;
             manager->printLogs();
             break;
         }
-        case '6': {
-            // load
+        case '6': { // load
             loadOpt(manager);
             break;
         }
-        case '7': {
-            CLEAR;
-            // save;
+        case '7': { // save
+            saveOpt(manager);
             break;
         }
-        case '8': {
+        case '8': { // toggle autosave;
             CLEAR;
-            // toggle autosave;
             manager->toggleAutosave();
         }
-        case 'Z': {
-            // ctrl-z
+        case 'Z': { // revert last change.
             break;
         }
-        case 'E': {
-            
+        case 'E': { // exit
+            exitOpt(&opt);
             break;
         }
         }
