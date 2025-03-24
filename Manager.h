@@ -63,6 +63,7 @@ namespace Program {
         int save();
         int load();
         void test();
+        void toggleAutosave();
     };
 }
 #endif
