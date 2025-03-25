@@ -27,7 +27,7 @@ void Program::AppManager::displayMenu() {
     std::cout << "[------------------]\n";
 }
 void Program::AppManager::showAllStats() {
-    
+
 }
 
 
@@ -49,7 +49,25 @@ void Program::AppManager::removeCarOption() {
     // TODO: finish
 }
 void Program::AppManager::addLogOption() {
-    // TODO: finish
+    CLEAR;
+    Program::Wpis newLog;
+    std::cout << "Wybierz auto z listy: ";
+    auto carList = this->manager->getAllCars();
+    for (int i=0; i<carList.max_size(); i++) {
+        std::cout << "[" << i+1 << "] " << carList[i].nazwa << '\n';
+    }
+    int opt;
+    do {
+        std::cin >> opt;
+        opt--;
+        if (opt > 15 || opt < 0)  {
+            std::cout << "Opcja " << opt+1 << " jest niepoprawna! Wybierz inna!\n";
+            continue;
+        }
+    } while (opt > 15  || opt < 0);
+
+    Program::Auto pickedCar = carList.at(opt);
+
 }
 void Program::AppManager::loadOption() {
     CLEAR;

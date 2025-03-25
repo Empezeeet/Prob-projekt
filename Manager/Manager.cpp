@@ -144,16 +144,14 @@ Program::Auto* Program::Manager::findCar(std::string name)
     return nullptr;
 }
 void Program::Manager::test() {
-    for (auto i : this->_cars) {
-        std::cout << "ID: " << i.id << "\n";
-    }
-	this->defragmentation();
-    for (auto i : this->_cars) {
-        std::cout << "ID: " << i.id << "\n";
-    }
+   
+}
+std::array<Program::Auto, 16> Program::Manager::getAllCars() {
+    return this->_cars;
 }
 int Program::Manager::save() {
     this->defragmentation();
+
     std::ofstream file(this->carsFile);
     if (!file) return -1;
 

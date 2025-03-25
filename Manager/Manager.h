@@ -83,6 +83,7 @@ namespace Program {
         void test();
         void calculateStats();
         void toggleAutosave();
+        std::array<Program::Auto, 16> getAllCars();
     };
 }
 #endif
