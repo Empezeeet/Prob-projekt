@@ -5,8 +5,8 @@
 #define carSaveFilePath "C:\\cars.txt"
 #define logSaveFilePath "C:\\logs.txt"
 #else
-#define carSaveFilePath "build/save/cars.txt"
-#define logSaveFilePath "build/save/logs.txt"
+#define carSaveFilePath "saves/carsSave.txt"
+#define logSaveFilePath "saves/logsSave.txt"
 #endif
 
 

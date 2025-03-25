@@ -173,7 +173,10 @@ int Program::Manager::load()
 {
     // TODO: not tested;
     std::ifstream file(this->carsFile);
-    if (!file) return -1;
+    if (!file) {
+        std::cout << "Error when opening carsFile\n";
+        return -1;
+    }
     this->_cars.fill({});
     Program::Auto car;
     int count = 0;
@@ -188,7 +191,10 @@ int Program::Manager::load()
     file.close();
     // load logs from file
     std::ifstream logFile(this->logsFile);
-    if (!logFile) return -1;
+    if (!logFile) {
+        std::cout << "Error when opening logFIle\n";
+        return -1;
+    }
     this->_logs.fill({});
     Program::Wpis log;
     count = 0;
