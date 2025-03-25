@@ -36,6 +36,12 @@ namespace Program {
         float ilosc;
         long int timestamp;
     };
+    struct Stats {
+        int car_id;
+        std::string name;
+        float value; 
+        char unit[6];
+    };
     class Manager
     {
     private:
@@ -63,7 +69,7 @@ namespace Program {
 
 
     public:
-        Manager(std::string filePath = "C:\\auta.txt", std::string logsPath = "C:\\logs.txt");
+        Manager(std::string filePath = carSaveFilePath, std::string logsPath = logSaveFilePath);
         ~Manager();
         int addCar(Auto car);
         int removeCar(int carID);
@@ -75,6 +81,7 @@ namespace Program {
         int save();
         int load();
         void test();
+        void calculateStats();
         void toggleAutosave();
     };
 }

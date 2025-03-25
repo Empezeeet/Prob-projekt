@@ -19,17 +19,15 @@ Program::Manager::~Manager()
 int Program::Manager::addCar(Program::Auto car) {
     if (car.id != 0) return -1; // id is auto-generated;
     // auto-gen car.id;
-    int id = car.przebieg + this->_carCount + 1;
-    // TODO: check is id valid;
-    car.id = id;
+    car.id = car.przebieg + this->_carCount + 1;
+    
 
     // add to array;
-    this->_cars[this->_carCount] = car;
-    this->_carCount++;
+    this->_cars[this->_carCount++] = car;
 
     this->defragmentation();
     this->autoSave();
-    return id;
+    return car.id;
 }
 int Program::Manager::removeCar(int carID)
 {
@@ -61,6 +59,11 @@ int Program::Manager::removeCar(std::string name)
 int Program::Manager::addLog(Wpis log)
 {
     // TODO: add log
+    if (log.id != 0) return -1;
+    log.id = log.przebieg + 2 + this->_logCount;
+    this->_logs[this->_logCount++] = log;
+    this->defragmentation();
+    this->autoSave();
     return 0;
 }
 int Program::Manager::removeLog(int logID)
@@ -72,8 +75,6 @@ void Program::Manager::toggleAutosave() {
     this->_autosave = !this->_autosave;
     std::cout << "Autosave: " << (this->_autosave == true ? "ON" : "OFF") << "\n";
 }
-
-
 void Program::Manager::printCars()
 {
     if (this->_carCount == 0) {
@@ -168,7 +169,6 @@ int Program::Manager::save() {
     file2.close();
     return 0;
 }
-
 int Program::Manager::load()
 {
     // TODO: not tested;

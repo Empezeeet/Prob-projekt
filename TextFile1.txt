@@ -1,12 +1,12 @@
 1. Opis i cel programu
-	Program na podstawie danych podanych przez uzytkownika oblicza miesieczne wydatki, koszt przejechania kilometra, �rednia cen� paliwa.
+	Program na podstawie danych podanych przez uzytkownika oblicza miesieczne wydatki, koszt przejechania kilometra, srednia cena paliwa.
 	Program korzysta z 2 struktur
 		- Auto
 		- Wpis
 
 2. Deklaracje struktur
-	Struktura powinna zawiera� pola r�nych typ�w (np. liczby, napisy, inne struktury).
-	Przyk�ad:
+	Struktura powinna zawierac pola ronych typow (np. liczby, napisy, inne struktury).
+	Przyklad:
 
 	struct Auto {
 		int id;
@@ -43,12 +43,12 @@
 	Wyszukiwanie wpisow po dacie.
 	Wyszukiwanie aut po nazwie;
 
-5. Obs�uga wej�cia/wyj�cia
-	Wczytywanie danych od u�ytkownika (np. cin dla warto�ci wprowadzanych z klawiatury).
+5. Obsluga wejscia/wyjscia
+	Wczytywanie danych od uzytkownika (np. cin dla warto�ci wprowadzanych z klawiatury).
 	Zapisywanie i odczytywanie danych z pliku (fstream).
 
-6. Obs�uga b��d�w i zabezpieczenia
-	Sprawdzanie poprawno�ci wprowadzanych danych (np. while dla b��dnych warto�ci).
+6. Obsluga bledow i zabezpieczenia
+	Sprawdzanie poprawnosci wprowadzanych danych (np. while dla b��dnych warto�ci).
 	Unikanie przekroczenia rozmiaru tablicy.
 	Obs�uga b��d�w plikowych.
 

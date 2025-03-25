@@ -21,10 +21,16 @@ void Program::AppManager::displayMenu() {
     std::cout << "[ 6 Wczytaj        ]\n";
     std::cout << "[ 7 Zapisz         ]\n";
     std::cout << "[ 8 Autosave       ]\n";
+    std::cout << "[ 9 Statystyki     ]\n";
     std::cout << "[ (Z) Cofnij       ]\n";
     std::cout << "[ (E) Exit         ]\n";
     std::cout << "[------------------]\n";
 }
+void Program::AppManager::showAllStats() {
+    
+}
+
+
 void Program::AppManager::addCarOption() {
     CLEAR;
     Program::Auto newCar;

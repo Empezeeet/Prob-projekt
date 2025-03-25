@@ -22,6 +22,7 @@ namespace Program {
             void showAllCars();
             void showAllLogs();
             void toggleAutosave();
+            void showAllStats();
 
 
 
