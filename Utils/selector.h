@@ -4,12 +4,13 @@
 #include <array>
 #include <iostream>
 #include "../Manager/Manager.h"
+#include "../Interfaces/ISelectable.h"
 namespace Program {
     class Components {
 
 
     public:
-        static Program::Auto* listSelector(Program::CarArray* items);
+        static Program::ISelectable* listSelector(Program::ISelectable* items, int size, std::string message);
     
     
     

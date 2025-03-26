@@ -31,16 +31,17 @@ void Program::AppManager::showAllStats() {
 }
 void Program::AppManager::showStatsOption() {
     CLEAR;
-    Program::Auto* pickedCar = Program::Components::listSelector(this->manager->getAllCars());
+    Program::CarArray* carArray = this->manager->getAllCars();
+    Program::Auto* pickedCar = (Program::Auto*)Program::Components::listSelector(&carArray->at(0), carArray->max_size(), "Wybierz auto z listy: ");
 
-    if (pickedCar == nullptr) {
+    if (pickedCar == nullptr || !pickedCar) {
         // error;
-        std::cout << "Wystapil blad. Spróbuj ponownie. KOD: SSO-1\n";
+        CLEAR;
+        std::cout << "Brak aut do obliczania statystyk.\nKod błędu: SSO-1\n";
         return;
     }
     CLEAR;
-    std::cout << "Wybrano auto: " << pickedCar->nazwa << '\n';
-    // TODO: add calculating status functionality.
+    std::cout << "Wybrano auto: " << pickedCar->getName() << '\n';
     // TODO: finish showing stats.
     
 
@@ -69,12 +70,17 @@ void Program::AppManager::addCarOption() {
 }
 void Program::AppManager::removeCarOption() {
     CLEAR;
-    Program::Auto* selectedCar = Program::Components::listSelector(this->manager->getAllCars());
-    std::cout << "Czy na pewno chcesz usunac: " << selectedCar->nazwa << "? (Y/N)";
+    Program::CarArray* carArray = this->manager->getAllCars();
+    Program::Auto* pickedCar = (Program::Auto*)Program::Components::listSelector(&carArray->at(0), carArray->max_size(), "Wybierz auto z listy: ");   
+    if (pickedCar == nullptr || !pickedCar) {
+        CLEAR;
+        std::cout << "Nie znaleziono auta! Kod błędu: RCO-1";
+    } 
+    std::cout << "Czy na pewno chcesz usunac: " << pickedCar->getName() << "? (Y/N)";
     char c;
     std::cin >> c;
     if (c == 'Y') {
-        int res = this->manager->removeCar(selectedCar->id);
+        int res = this->manager->removeCar(pickedCar->getID());
         CLEAR;
         std::cout << (res == -1 ? "Blad.\n" : "OK\n");
         return;
@@ -90,10 +96,12 @@ void Program::AppManager::addLogOption() {
     CLEAR;
     Program::Wpis newLog;
     newLog.id = 0;
-    Program::Auto* pickedCar = Program::Components::listSelector(this->manager->getAllCars());
-    if (pickedCar == nullptr) {
-        std::cout << "Wystapil blad. Sprobuj ponownie. KOD: ALO-1\n";
-    }
+    Program::CarArray* carArray = this->manager->getAllCars();
+    Program::Auto* pickedCar = (Program::Auto*)Program::Components::listSelector(&carArray->at(0), carArray->max_size(), "Wybierz auto z listy: ");   
+    if (pickedCar == nullptr || !pickedCar) {
+        CLEAR;
+        std::cout << "Nie znaleziono auta! Kod błędu: ALO-1";
+    } 
     CLEAR;
     
     std::cout << "Wybrano auto: " << pickedCar->nazwa << "\n";

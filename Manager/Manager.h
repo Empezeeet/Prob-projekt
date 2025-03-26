@@ -19,31 +19,44 @@
 #include <typeinfo>
 #include <ctime>
 #include "../Utils/replace.h"
-
+#include "../Interfaces/ISelectable.h"
 
 
 
 namespace Program {
     
-    struct Auto {
+    struct Auto : public ISelectable {
         int id;
         std::string nazwa;
         long int przebieg;
+        int getID() const override {
+            return this->id;
+        }
+        std::string getName() const override {
+            return this->nazwa;
+        }
     };
-    struct Wpis {
+    struct Wpis : public ISelectable {
         int id;
         int auto_id;
         long int przebieg;
         float cena;
         float ilosc;
         std::time_t timestamp;
+        int getID() const override {
+            return this->id;
+        }
+        std::string getName() const override {
+            return "";
+        }
     };
+    /*
     struct Stats {
         int car_id;
         std::string name;
         float value; 
         char unit[6];
-    };
+    };*/
     typedef std::array<Program::Wpis, 64> LogArray;
     typedef std::array<Program::Auto, 16> CarArray;
     class Manager
