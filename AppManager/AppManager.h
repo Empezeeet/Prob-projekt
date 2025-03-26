@@ -1,7 +1,9 @@
 #ifndef APPMANAGER_H
 #define APPMANAGER_H
 #include "../Manager/Manager.h"
+#include "../Utils/selector.h"
 #include <iostream>
+#include <ctime>
 namespace Program {
     class AppManager {
       

@@ -17,6 +17,7 @@
 #include <fstream>
 #include <iostream>
 #include <typeinfo>
+#include <ctime>
 #include "../Utils/replace.h"
 
 
@@ -34,7 +35,7 @@ namespace Program {
         long int przebieg;
         float cena;
         float ilosc;
-        long int timestamp;
+        std::time_t timestamp;
     };
     struct Stats {
         int car_id;
@@ -83,7 +84,7 @@ namespace Program {
         void test();
         void calculateStats();
         void toggleAutosave();
-        std::array<Program::Auto, 16> getAllCars();
+        std::array<Program::Auto, 16>* getAllCars();
     };
 }
 #endif

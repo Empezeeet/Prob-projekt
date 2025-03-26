@@ -58,10 +58,11 @@ int Program::Manager::removeCar(std::string name)
 }
 int Program::Manager::addLog(Wpis log)
 {
-    // TODO: add log
+    // FIXME: doesn't update car's mileage.
     if (log.id != 0) return -1;
     log.id = log.przebieg + 2 + this->_logCount;
     this->_logs[this->_logCount++] = log;
+    this->findCar(log.auto_id)->przebieg = log.przebieg;
     this->defragmentation();
     this->autoSave();
     return 0;
@@ -101,8 +102,9 @@ void Program::Manager::printLogs()
     }
     std::cout << "|-------------\n";
     for (const auto& log : this->_logs) {
-        
-        std::cout << "[ DATA WPISU: " << log.timestamp << "\t\n";
+        if (log.id == 0 ) continue;
+        // FIXME: date is not converted from timestamp;
+        std::cout << "[ DATA WPISU: " << std::ctime(&log.timestamp) << "\t\n";
         std::cout << "[ NAZWA AUTA: " << this->findCar(log.auto_id)->nazwa << "\t\n";
         std::cout << "[ Ilosc: " << log.ilosc << "\t\n";
         std::cout << "[ Cena: " << log.cena << "\t\n";
@@ -146,8 +148,8 @@ Program::Auto* Program::Manager::findCar(std::string name)
 void Program::Manager::test() {
    
 }
-std::array<Program::Auto, 16> Program::Manager::getAllCars() {
-    return this->_cars;
+std::array<Program::Auto, 16>* Program::Manager::getAllCars() {
+    return &this->_cars;
 }
 int Program::Manager::save() {
     this->defragmentation();

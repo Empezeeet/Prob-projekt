@@ -46,28 +46,56 @@ void Program::AppManager::addCarOption() {
     this->manager->addCar(newCar);
 }
 void Program::AppManager::removeCarOption() {
-    // TODO: finish
+    CLEAR;
+    Program::Auto* selectedCar = Program::Components::listSelector(this->manager->getAllCars());
+    std::cout << "Czy na pewno chcesz usunac: " << selectedCar->nazwa << "? (Y/N)";
+    char c;
+    std::cin >> c;
+    if (c == 'Y') {
+        int res = this->manager->removeCar(selectedCar->id);
+        CLEAR;
+        std::cout << (res == -1 ? "Blad.\n" : "OK\n");
+        return;
+    } else {
+        CLEAR;
+        std::cout << "Anulowano usuwanie auta.";
+        return;
+    }
+
+
 }
 void Program::AppManager::addLogOption() {
     CLEAR;
     Program::Wpis newLog;
-    std::cout << "Wybierz auto z listy: ";
-    auto carList = this->manager->getAllCars();
-    for (int i=0; i<carList.max_size(); i++) {
-        std::cout << "[" << i+1 << "] " << carList[i].nazwa << '\n';
+    newLog.id = 0;
+    Program::Auto* pickedCar = Program::Components::listSelector(this->manager->getAllCars());
+    if (pickedCar == nullptr) {
+        std::cout << "HWDPJP100%\n";
+    } else {
+        CLEAR;
     }
-    int opt;
+    
+    std::cout << "Wybrano auto: " << pickedCar->nazwa << "\n";
+    newLog.auto_id = pickedCar->id;
+    // przebieg
     do {
-        std::cin >> opt;
-        opt--;
-        if (opt > 15 || opt < 0)  {
-            std::cout << "Opcja " << opt+1 << " jest niepoprawna! Wybierz inna!\n";
-            continue;
-        }
-    } while (opt > 15  || opt < 0);
-
-    Program::Auto pickedCar = carList.at(opt);
-
+        std::cout << "Podaj aktualny przebieg w kilometrach: ";
+        std::cin >> newLog.przebieg;
+    } while (newLog.przebieg < pickedCar->przebieg);
+   
+    // ilosc
+    do {
+        std::cout << "Podaj ilosc paliwa: ";
+        std::cin >> newLog.ilosc;
+    } while (newLog.ilosc < 0);
+    // cena
+    do {
+        std::cout << "Podaj cene tankowania: ";
+        std::cin >> newLog.cena;
+    } while (newLog.cena < 0);
+    newLog.timestamp = std::time(NULL);
+    // TODO: test.
+    this->manager->addLog(newLog);
 }
 void Program::AppManager::loadOption() {
     CLEAR;

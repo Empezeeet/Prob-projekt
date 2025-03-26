@@ -3,5 +3,5 @@ set -e
 mkdir -p build
 cd build
 mkdir -p saves
-g++ ../main.cpp ../Manager/Manager.cpp ../Utils/replace.cpp ../AppManager/AppManager.cpp -o soft.exe;
+g++ ../main.cpp ../Manager/Manager.cpp ../Utils/replace.cpp ../AppManager/AppManager.cpp ../Utils/selector.cpp -o soft.exe;
 ./soft.exe;
