@@ -44,7 +44,11 @@ int main()
         case '8': { // toggle autosave;
             app->toggleAutosave();
         }
+        case '9': { // show stats;
+            app->showStatsOption();
+        }
         case 'Z': { // revert last change.
+            // TODO: add CTRL-Z option;
             break;
         }
         case 'E': { // exit

@@ -25,6 +25,7 @@ namespace Program {
             void showAllLogs();
             void toggleAutosave();
             void showAllStats();
+            void showStatsOption();
 
 
 

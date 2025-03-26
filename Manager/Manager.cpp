@@ -21,9 +21,11 @@ int Program::Manager::addCar(Program::Auto car) {
     // auto-gen car.id;
     car.id = car.przebieg + this->_carCount + 1;
     
-
+    if (++this->_carCount >= 16) {
+        return -2; // no space left
+    }
     // add to array;
-    this->_cars[this->_carCount++] = car;
+    this->_cars[this->_carCount] = car;
 
     this->defragmentation();
     this->autoSave();

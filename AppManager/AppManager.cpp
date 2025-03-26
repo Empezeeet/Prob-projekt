@@ -29,6 +29,23 @@ void Program::AppManager::displayMenu() {
 void Program::AppManager::showAllStats() {
 
 }
+void Program::AppManager::showStatsOption() {
+    CLEAR;
+    Program::Auto* pickedCar = Program::Components::listSelector(this->manager->getAllCars());
+
+    if (pickedCar == nullptr) {
+        // error;
+        std::cout << "Wystapil blad. Spróbuj ponownie. KOD: SSO-1\n";
+        return;
+    }
+    CLEAR;
+    std::cout << "Wybrano auto: " << pickedCar->nazwa << '\n';
+    // TODO: add calculating status functionality.
+    // TODO: finish showing stats.
+    
+
+
+}
 
 
 void Program::AppManager::addCarOption() {
@@ -43,7 +60,12 @@ void Program::AppManager::addCarOption() {
     } while (newCar.przebieg < 0);
     newCar.id = 0;
 
-    this->manager->addCar(newCar);
+    int res = this->manager->addCar(newCar);
+    if (res == -2 ) {
+        CLEAR;
+        std::cout << "Brak wolnych miejsc na auto!\n";
+        return; 
+    }
 }
 void Program::AppManager::removeCarOption() {
     CLEAR;
@@ -70,10 +92,9 @@ void Program::AppManager::addLogOption() {
     newLog.id = 0;
     Program::Auto* pickedCar = Program::Components::listSelector(this->manager->getAllCars());
     if (pickedCar == nullptr) {
-        std::cout << "HWDPJP100%\n";
-    } else {
-        CLEAR;
+        std::cout << "Wystapil blad. Sprobuj ponownie. KOD: ALO-1\n";
     }
+    CLEAR;
     
     std::cout << "Wybrano auto: " << pickedCar->nazwa << "\n";
     newLog.auto_id = pickedCar->id;

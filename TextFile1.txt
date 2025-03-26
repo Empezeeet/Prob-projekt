@@ -29,32 +29,30 @@
 4. Funkcje do operacji na strukturach i tablicach
 
 	Dodawanie Aut oraz wpisow. T
-	Edycja wpisow.
+	Edycja wpisow. //TODO: edycja wpisow.
 	Usuwanie wpisow oraz Aut. T
 
 	Funkcja autosave po kazdej edycji. (Dodawanie/Usuwanie/Edycja). T
 	Funkcja cofnij po kazdej edycji. (Dodawanie/Usuwanie/Edycja)
 
-	Wyswietlanie aut, wpisow oraz statystyk (2/3)T
+	Wyswietlanie aut, wpisow oraz statystyk (2/3)T // TODO: statysyki 
 
-	Sortowanie wyswietlania wpisow po cenie, dacie, ilosci paliwa.
-	Sortowanie wyswietlania aut po przebiegu i nazwie.
+	Sortowanie wyswietlania wpisow po cenie, dacie, ilosci paliwa. // TODO: sortuj wpisy.
 
-	Wyszukiwanie wpisow po dacie.
-	Wyszukiwanie aut po nazwie;
+	Wyszukiwanie aut po nazwie; T
 
 5. Obsluga wejscia/wyjscia
-	Wczytywanie danych od uzytkownika (np. cin dla warto�ci wprowadzanych z klawiatury).
-	Zapisywanie i odczytywanie danych z pliku (fstream).
+	Wczytywanie danych od uzytkownika (np. cin dla warto�ci wprowadzanych z klawiatury). T
+	Zapisywanie i odczytywanie danych z pliku (fstream). T
 
 6. Obsluga bledow i zabezpieczenia
-	Sprawdzanie poprawnosci wprowadzanych danych (np. while dla b��dnych warto�ci).
-	Unikanie przekroczenia rozmiaru tablicy.
-	Obs�uga b��d�w plikowych.
+	Sprawdzanie poprawnosci wprowadzanych danych (np. while dla b��dnych warto�ci). T
+	Unikanie przekroczenia rozmiaru tablicy. T
+	Obs�uga b��d�w plikowych. T
 
 7. Menu u�ytkownika
-	Aplikacja konsolowa z menu.
+	Aplikacja konsolowa z menu. T
 
 8. Testowanie programu
-	Przetestowanie dzia�ania na r�nych przypadkach danych.
-	Sprawdzenie poprawno�ci wynik�w.
+	Przetestowanie dzia�ania na r�nych przypadkach danych. T
+	Sprawdzenie poprawno�ci wynik�w. T
