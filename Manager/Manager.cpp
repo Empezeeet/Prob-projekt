@@ -115,7 +115,7 @@ void Program::Manager::printLogs()
     }
 }
 void Program::Manager::defragmentation() {
-    std::array<Program::Auto, 16> defragmentedCars = {};
+    CarArray defragmentedCars = {};
     int count = 0;
     for (int i=0; i<15; i++) {
         if (this->_cars[i].nazwa == "") continue;
@@ -124,7 +124,7 @@ void Program::Manager::defragmentation() {
     }
     this->_cars = defragmentedCars;
     count = 0;
-    std::array<Program::Wpis, 64> defragmentedLogs = {};
+    Program::LogArray defragmentedLogs = {};
     for (int i=0; i<64; i++) {
         if (this->_logs[i].id == 0) continue;
         defragmentedLogs[count] = this->_logs[i];
@@ -150,7 +150,7 @@ Program::Auto* Program::Manager::findCar(std::string name)
 void Program::Manager::test() {
    
 }
-std::array<Program::Auto, 16>* Program::Manager::getAllCars() {
+Program::CarArray* Program::Manager::getAllCars() {
     return &this->_cars;
 }
 int Program::Manager::save() {

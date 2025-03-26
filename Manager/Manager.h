@@ -24,6 +24,7 @@
 
 
 namespace Program {
+    
     struct Auto {
         int id;
         std::string nazwa;
@@ -43,14 +44,16 @@ namespace Program {
         float value; 
         char unit[6];
     };
+    typedef std::array<Program::Wpis, 64> LogArray;
+    typedef std::array<Program::Auto, 16> CarArray;
     class Manager
     {
     private:
         
-        std::array<Auto, 16> _cars = {};
+        CarArray _cars = {};
         int _carCount = 0;
         
-        std::array<Wpis, 64> _logs = {};
+        LogArray _logs = {};
         int _logCount = 0;
         bool _autosave = true;
         std::string carsFile = carSaveFilePath;
@@ -84,7 +87,7 @@ namespace Program {
         void test();
         void calculateStats();
         void toggleAutosave();
-        std::array<Program::Auto, 16>* getAllCars();
+        Program::CarArray* getAllCars();
     };
 }
 #endif
