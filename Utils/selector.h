@@ -9,7 +9,7 @@ namespace Program {
 
 
     public:
-        static Program::Auto* listSelector(std::array<Program::Auto, 16>* items);
+        static Program::Auto* listSelector(Program::CarArray* items);
     
     
     

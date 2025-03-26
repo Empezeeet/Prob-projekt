@@ -4,7 +4,7 @@
 #else
 #define CLEAR system("clear")
 #endif
-Program::Auto* Program::Components::listSelector(std::array<Program::Auto, 16>* items) {
+Program::Auto* Program::Components::listSelector(Program::CarArray* items) {
     
     int count = 0;
     // count = 1, opt = 2, 
