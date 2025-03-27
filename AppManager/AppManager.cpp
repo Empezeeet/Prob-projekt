@@ -38,6 +38,7 @@ void Program::AppManager::showStatsOption() {
     }
     Program::Auto* pickedCar = (Program::Auto*)Program::Components::listSelector(
         carVector,
+
         Program::Auto::countNonEmpty(*carArray), 
         "Wybierz auto z listy: "
     );
@@ -80,7 +81,15 @@ void Program::AppManager::addCarOption() {
 void Program::AppManager::removeCarOption() {
     CLEAR;
     Program::CarArray* carArray = this->manager->getAllCars();
-    Program::Auto* pickedCar = (Program::Auto*)Program::Components::listSelector(std::vector<Program::ISelectable*>(carArray->begin(), carArray->end()), Program::Auto::countNonEmpty(*carArray), "Wybierz auto z listy: ");   
+    std::vector<Program::ISelectable*> carVector = {};
+    for (Program::Auto car : *carArray) {
+        carVector.push_back(&car);
+    }
+    Program::Auto* pickedCar = (Program::Auto*)Program::Components::listSelector(
+        carVector,
+        Program::Auto::countNonEmpty(*carArray), 
+        "Wybierz auto z listy: "
+    );
     if (pickedCar == nullptr || !pickedCar) {
         CLEAR;
         std::cout << "Nie znaleziono auta! Kod błędu: RCO-1";
@@ -106,7 +115,16 @@ void Program::AppManager::addLogOption() {
     Program::Wpis newLog;
     newLog.id = 0;
     Program::CarArray* carArray = this->manager->getAllCars();
-    Program::Auto* pickedCar = (Program::Auto*)Program::Components::listSelector(std::vector<Program::ISelectable*>(carArray->begin(), carArray->end()), Program::Auto::countNonEmpty(*carArray), "Wybierz auto z listy: ");   
+    std::vector<Program::ISelectable*> carVector = {};
+    for (Program::Auto car : *carArray) {
+        carVector.push_back(&car);
+    }
+    Program::Auto* pickedCar = (Program::Auto*)Program::Components::listSelector(
+        carVector,
+
+        Program::Auto::countNonEmpty(*carArray), 
+        "Wybierz auto z listy: "
+    );
     if (pickedCar == nullptr || !pickedCar) {
         CLEAR;
         std::cout << "Nie znaleziono auta! Kod błędu: ALO-1";

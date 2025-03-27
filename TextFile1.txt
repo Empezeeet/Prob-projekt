@@ -35,7 +35,7 @@
 	Funkcja autosave po kazdej edycji. (Dodawanie/Usuwanie/Edycja). T
 	Funkcja cofnij po kazdej edycji. (Dodawanie/Usuwanie/Edycja)
 
-	Wyswietlanie aut, wpisow oraz statystyk T // TODO: zrobic wyswietlanie.
+	Wyswietlanie aut, wpisow oraz statystyk T
 
 	Sortowanie wyswietlania wpisow po cenie, dacie, ilosci paliwa. // TODO: sortuj wpisy.
 
