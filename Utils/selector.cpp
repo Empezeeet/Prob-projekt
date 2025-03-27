@@ -7,6 +7,7 @@
 Program::ISelectable* Program::Components::listSelector(std::vector<Program::ISelectable*> items, int size, std::string message) {
     int count = 0;
     std::cout << "size: " << size << "\n";
+    // fixme: not showing all...
     std::cout << message << '\n';
     for (int i=0; i<size; i++) {
         if (items.at(i) == nullptr) continue; 
