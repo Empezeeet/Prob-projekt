@@ -14,12 +14,14 @@
 #include <string>
 #include <array>
 #include <algorithm>
+#include <vector>
 #include <fstream>
 #include <iostream>
 #include <typeinfo>
 #include <ctime>
 #include "../Utils/replace.h"
 #include "../Interfaces/ISelectable.h"
+#include "../Utils/selector.h"
 
 
 
@@ -41,6 +43,15 @@ namespace Program {
                 if (car.id!=0) count++;
             }
             return count;
+        }
+        static Program::Auto* carPicker(std::array<Program::Auto, 16>* carArray) {
+            std::vector<Program::ISelectable*> carVector;
+            for (int i=0; i<16; i++) {
+                Program::Auto* car = &carArray->at(i);
+                if (car->getID() == 0 || car == nullptr) continue;
+                carVector.push_back(car);
+            }
+            return (Program::Auto*)Program::Components::listSelector(carVector, carVector.size(), "Wybierz auto z listy: ");
         }
     };
     struct Wpis : public ISelectable {
@@ -64,6 +75,7 @@ namespace Program {
             }
             return count;
         }
+        
     };
     
     typedef std::array<Program::Wpis, 64> LogArray;

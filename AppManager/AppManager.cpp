@@ -32,14 +32,8 @@ void Program::AppManager::showAllStats() {
 void Program::AppManager::showStatsOption() {
     CLEAR;
     // fixed segfault???
-    std::vector<Program::ISelectable*> carVector;
-    for (int i=0; i<16; i++) {
-        Program::Auto* car = &this->manager->getAllCars()->at(i);
-        if (car->getID() == 0 || car == nullptr) continue;
-        carVector.push_back(car);
-    }
-    Program::Auto* pickedCar = (Program::Auto*)Program::Components::listSelector(carVector, carVector.size(), "Wybierz auto z listy: ");
- 
+    Program::Auto* pickedCar = Program::Auto::carPicker(this->manager->getAllCars());
+
  
     if (pickedCar == nullptr || !pickedCar) {
         // error;
@@ -80,14 +74,8 @@ void Program::AppManager::removeCarOption() {
     CLEAR;
 
      // fixed segfault???
-     std::vector<Program::ISelectable*> carVector;
-     for (int i=0; i<16; i++) {
-         Program::Auto* car = &this->manager->getAllCars()->at(i);
-         if (car->getID() == 0 || car == nullptr) continue;
-         carVector.push_back(car);
-     }
-     Program::Auto* pickedCar = (Program::Auto*)Program::Components::listSelector(carVector, carVector.size(), "Wybierz auto z listy: ");
- 
+     Program::Auto* pickedCar = Program::Auto::carPicker(this->manager->getAllCars());
+
  
     if (pickedCar == nullptr || !pickedCar) {
         CLEAR;
@@ -114,15 +102,7 @@ void Program::AppManager::addLogOption() {
     Program::Wpis newLog;
     newLog.id = 0;
     // fixed segfault???
-    std::vector<Program::ISelectable*> carVector;
-    for (int i=0; i<16; i++) {
-        Program::Auto* car = &this->manager->getAllCars()->at(i);
-        if (car->getID() == 0 || car == nullptr) continue;
-        carVector.push_back(car);
-    }
-    Program::Auto* pickedCar = (Program::Auto*)Program::Components::listSelector(carVector, carVector.size(), "Wybierz auto z listy: ");
-
-
+    Program::Auto* pickedCar = Program::Auto::carPicker(this->manager->getAllCars());
 
     if (pickedCar == nullptr || !pickedCar) {
         CLEAR;
