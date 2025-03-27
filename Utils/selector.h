@@ -10,7 +10,7 @@ namespace Program {
 
 
     public:
-        static Program::ISelectable* listSelector(std::vector<Program::ISelectable*>, int size, std::string message);
+        static Program::ISelectable* listSelector(std::vector<Program::ISelectable*>&, int size, std::string message);
     
     
     

@@ -31,13 +31,16 @@ void Program::AppManager::showAllStats() {
 }
 void Program::AppManager::showStatsOption() {
     CLEAR;
+    // fixed segfault???
     std::vector<Program::ISelectable*> carVector;
-    for (auto& car : this->manager->getAllCarsCopy()) {
-        if (car.getID() == 0) continue;
-        carVector.push_back(&car);
+    for (int i=0; i<16; i++) {
+        Program::Auto* car = &this->manager->getAllCars()->at(i);
+        if (car->getID() == 0 || car == nullptr) continue;
+        carVector.push_back(car);
     }
     Program::Auto* pickedCar = (Program::Auto*)Program::Components::listSelector(carVector, carVector.size(), "Wybierz auto z listy: ");
-
+ 
+ 
     if (pickedCar == nullptr || !pickedCar) {
         // error;
         CLEAR;
@@ -76,13 +79,16 @@ void Program::AppManager::addCarOption() {
 void Program::AppManager::removeCarOption() {
     CLEAR;
 
-    std::vector<Program::ISelectable*> carVector;
-    for (auto& car : this->manager->getAllCarsCopy()) {
-        if (car.getID() == 0) continue;
-        carVector.push_back(&car);
-    }
-    Program::Auto* pickedCar = (Program::Auto*)Program::Components::listSelector(carVector, carVector.size(), "Wybierz auto z listy: ");
-
+     // fixed segfault???
+     std::vector<Program::ISelectable*> carVector;
+     for (int i=0; i<16; i++) {
+         Program::Auto* car = &this->manager->getAllCars()->at(i);
+         if (car->getID() == 0 || car == nullptr) continue;
+         carVector.push_back(car);
+     }
+     Program::Auto* pickedCar = (Program::Auto*)Program::Components::listSelector(carVector, carVector.size(), "Wybierz auto z listy: ");
+ 
+ 
     if (pickedCar == nullptr || !pickedCar) {
         CLEAR;
         std::cout << "Nie znaleziono auta! Kod błędu: RCO-1";
@@ -107,11 +113,12 @@ void Program::AppManager::addLogOption() {
     CLEAR;
     Program::Wpis newLog;
     newLog.id = 0;
-
+    // fixed segfault???
     std::vector<Program::ISelectable*> carVector;
-    for (auto& car : this->manager->getAllCarsCopy()) {
-        if (car.getID() == 0) continue;
-        carVector.push_back(&car);
+    for (int i=0; i<16; i++) {
+        Program::Auto* car = &this->manager->getAllCars()->at(i);
+        if (car->getID() == 0 || car == nullptr) continue;
+        carVector.push_back(car);
     }
     Program::Auto* pickedCar = (Program::Auto*)Program::Components::listSelector(carVector, carVector.size(), "Wybierz auto z listy: ");
 
@@ -119,7 +126,8 @@ void Program::AppManager::addLogOption() {
 
     if (pickedCar == nullptr || !pickedCar) {
         CLEAR;
-        std::cout << "Nie znaleziono auta! Kod błędu: ALO-1";
+        std::cout << "Nie znaleziono auta! Kod błędu: ALO-1\n";
+        return;
     } 
     CLEAR;
     
