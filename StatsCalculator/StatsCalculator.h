@@ -7,16 +7,16 @@ namespace Program {
     
     class StatsCalculator {
 
-        private:
+        public:
         /*Available stats:
             - usage Liters per 100 km
             - monthly expenses
             - all-time expenses
             - 
         */
-        static float calculateAllTimeExpenses(LogArray* logs);
-        static float calculateMonthlyExpenses(LogArray* logs);
-        static float fuelUsage(LogArray* logs, Program::Auto* car);
+        static float calculateAllTimeExpenses(LogArray& logs);
+        static float calculateMonthlyExpenses(LogArray& logs);
+        static float fuelUsage(LogArray& logs, Program::Auto* car);
         
 
 

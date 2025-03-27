@@ -4,6 +4,8 @@
 
 
 
+
+
 void Program::Manager::autoSave() {
 	if (!this->_autosave) return;
     this->save();
@@ -17,6 +19,7 @@ Program::Manager::~Manager()
 {
 }
 int Program::Manager::addCar(Program::Auto car) {
+    //FIXME: use RNG to generate id.
     if (car.id != 0) return -1; // id is auto-generated;
     // auto-gen car.id;
     car.id = car.przebieg + this->_carCount + 1;
@@ -60,7 +63,7 @@ int Program::Manager::removeCar(std::string name)
 }
 int Program::Manager::addLog(Wpis log)
 {
-    // FIXME: doesn't update car's mileage.
+    // FIXME: use RNG to get id. 
     if (log.id != 0) return -1;
     log.id = log.przebieg + 2 + this->_logCount;
     this->_logs[this->_logCount++] = log;
@@ -138,6 +141,9 @@ Program::Auto* Program::Manager::findCar(int carID)
         return &this->_cars[i];
     }
     return nullptr;
+}
+Program::LogArray& Program::Manager::getAllLogs() {
+    return this->_logs;
 }
 Program::Auto* Program::Manager::findCar(std::string name)
 {

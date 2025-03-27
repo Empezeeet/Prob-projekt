@@ -1,7 +1,7 @@
 #ifndef SELECTOR_H
 #define SELECTOR_H
 
-#include <array>
+#include <vector>
 #include <iostream>
 #include "../Manager/Manager.h"
 #include "../Interfaces/ISelectable.h"
@@ -10,7 +10,7 @@ namespace Program {
 
 
     public:
-        static Program::ISelectable* listSelector(Program::ISelectable* items, int size, std::string message);
+        static Program::ISelectable* listSelector(std::vector<Program::ISelectable*>, int size, std::string message);
     
     
     

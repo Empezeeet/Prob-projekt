@@ -32,7 +32,15 @@ void Program::AppManager::showAllStats() {
 void Program::AppManager::showStatsOption() {
     CLEAR;
     Program::CarArray* carArray = this->manager->getAllCars();
-    Program::Auto* pickedCar = (Program::Auto*)Program::Components::listSelector(&carArray->at(0), carArray->max_size(), "Wybierz auto z listy: ");
+    std::vector<Program::ISelectable*> carVector = {};
+    for (Program::Auto car : *carArray) {
+        carVector.push_back(&car);
+    }
+    Program::Auto* pickedCar = (Program::Auto*)Program::Components::listSelector(
+        carVector,
+        Program::Auto::countNonEmpty(*carArray), 
+        "Wybierz auto z listy: "
+    );
 
     if (pickedCar == nullptr || !pickedCar) {
         // error;
@@ -42,9 +50,10 @@ void Program::AppManager::showStatsOption() {
     }
     CLEAR;
     std::cout << "Wybrano auto: " << pickedCar->getName() << '\n';
-    // TODO: finish showing stats.
-    
-
+    Program::LogArray& logs = this->manager->getAllLogs();
+    std::cout << "Ogolne wydatki: " << StatsCalculator::calculateAllTimeExpenses(logs) <<'\n';
+    std::cout << "Miesieczne wydatki: " << StatsCalculator::calculateMonthlyExpenses(logs) << '\n'; 
+    std::cout << "Spalanie: " << StatsCalculator::fuelUsage(logs, pickedCar) << "L/100km\n";
 
 }
 
@@ -71,7 +80,7 @@ void Program::AppManager::addCarOption() {
 void Program::AppManager::removeCarOption() {
     CLEAR;
     Program::CarArray* carArray = this->manager->getAllCars();
-    Program::Auto* pickedCar = (Program::Auto*)Program::Components::listSelector(&carArray->at(0), carArray->max_size(), "Wybierz auto z listy: ");   
+    Program::Auto* pickedCar = (Program::Auto*)Program::Components::listSelector(std::vector<Program::ISelectable*>(carArray->begin(), carArray->end()), Program::Auto::countNonEmpty(*carArray), "Wybierz auto z listy: ");   
     if (pickedCar == nullptr || !pickedCar) {
         CLEAR;
         std::cout << "Nie znaleziono auta! Kod błędu: RCO-1";
@@ -97,7 +106,7 @@ void Program::AppManager::addLogOption() {
     Program::Wpis newLog;
     newLog.id = 0;
     Program::CarArray* carArray = this->manager->getAllCars();
-    Program::Auto* pickedCar = (Program::Auto*)Program::Components::listSelector(&carArray->at(0), carArray->max_size(), "Wybierz auto z listy: ");   
+    Program::Auto* pickedCar = (Program::Auto*)Program::Components::listSelector(std::vector<Program::ISelectable*>(carArray->begin(), carArray->end()), Program::Auto::countNonEmpty(*carArray), "Wybierz auto z listy: ");   
     if (pickedCar == nullptr || !pickedCar) {
         CLEAR;
         std::cout << "Nie znaleziono auta! Kod błędu: ALO-1";
@@ -123,7 +132,6 @@ void Program::AppManager::addLogOption() {
         std::cin >> newLog.cena;
     } while (newLog.cena < 0);
     newLog.timestamp = std::time(NULL);
-    // TODO: test.
     this->manager->addLog(newLog);
 }
 void Program::AppManager::loadOption() {

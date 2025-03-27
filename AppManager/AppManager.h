@@ -2,8 +2,10 @@
 #define APPMANAGER_H
 #include "../Manager/Manager.h"
 #include "../Utils/selector.h"
+#include "../StatsCalculator/StatsCalculator.h"
 #include <iostream>
 #include <ctime>
+#include <vector>
 namespace Program {
     class AppManager {
       

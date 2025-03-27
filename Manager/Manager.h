@@ -35,6 +35,13 @@ namespace Program {
         std::string getName() const override {
             return this->nazwa;
         }
+        static int countNonEmpty(std::array<Program::Auto, 16> carArray) {
+            int count=0;
+            for (Program::Auto& car : carArray) {
+                if (car.id!=0) count++;
+            }
+            return count;
+        }
     };
     struct Wpis : public ISelectable {
         int id;
@@ -43,20 +50,22 @@ namespace Program {
         float cena;
         float ilosc;
         std::time_t timestamp;
+        
         int getID() const override {
             return this->id;
         }
         std::string getName() const override {
             return "";
         }
+        static int countNonEmpty(std::array<Program::Wpis, 64> logArray) {
+            int count=0;
+            for (Program::Wpis& log : logArray) {
+                if (log.id!=0) count++;
+            }
+            return count;
+        }
     };
-    /*
-    struct Stats {
-        int car_id;
-        std::string name;
-        float value; 
-        char unit[6];
-    };*/
+    
     typedef std::array<Program::Wpis, 64> LogArray;
     typedef std::array<Program::Auto, 16> CarArray;
     class Manager
@@ -101,6 +110,7 @@ namespace Program {
         void calculateStats();
         void toggleAutosave();
         Program::CarArray* getAllCars();
+        Program::LogArray& getAllLogs();
     };
 }
 #endif
