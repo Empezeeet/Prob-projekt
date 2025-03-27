@@ -110,6 +110,7 @@ namespace Program {
         void calculateStats();
         void toggleAutosave();
         Program::CarArray* getAllCars();
+        Program::CarArray getAllCarsCopy();
         Program::LogArray& getAllLogs();
     };
 }

@@ -18,6 +18,9 @@ Program::Manager::Manager(std::string filePath, std::string logsPath) {
 Program::Manager::~Manager()
 {
 }
+Program::CarArray Program::Manager::getAllCarsCopy() {
+    return this->_cars;
+}
 int Program::Manager::addCar(Program::Auto car) {
     //FIXME: use RNG to generate id.
     if (car.id != 0) return -1; // id is auto-generated;
@@ -163,14 +166,20 @@ int Program::Manager::save() {
     this->defragmentation();
 
     std::ofstream file(this->carsFile);
-    if (!file) return -1;
+    if (!file) {
+        std::cout << "Nie można zapisać do pliku aut!. Kod błędu SAV-1\n";
+        return -1;
+    }
 
     for (const Auto& car : this->_cars) {
         file << car.id << " " << replaceString(car.nazwa, ' ', '_') << " " << car.przebieg << '\n';
     }
     file.close();
     std::ofstream file2(this->logsFile);
-    if (!file2) return -2;
+    if (!file2) {
+        std::cout << "Nie można zapisać do pliku wpisów!. Kod błędu: SAV-2\n";
+        return -2;
+    }
     for (const Wpis& log : this->_logs) {
         file2 << log.id << " " << log.auto_id << " " << log.cena << " " << log.ilosc << " " << log.przebieg << "\n";
     }
@@ -179,10 +188,9 @@ int Program::Manager::save() {
 }
 int Program::Manager::load()
 {
-    // TODO: not tested;
     std::ifstream file(this->carsFile);
     if (!file) {
-        std::cout << "Error when opening carsFile\n";
+        std::cout << "Nie można otworzyć pliku aut!. Kod błędu: PML-1\n";
         return -1;
     }
     this->_cars.fill({});
@@ -200,8 +208,8 @@ int Program::Manager::load()
     // load logs from file
     std::ifstream logFile(this->logsFile);
     if (!logFile) {
-        std::cout << "Error when opening logFIle\n";
-        return -1;
+        std::cout << "Nie można otowrzyć pliku wpisów! Kod błędu: PML-2\n";
+        return -2;
     }
     this->_logs.fill({});
     Program::Wpis log;

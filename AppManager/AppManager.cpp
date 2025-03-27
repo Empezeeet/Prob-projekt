@@ -31,17 +31,12 @@ void Program::AppManager::showAllStats() {
 }
 void Program::AppManager::showStatsOption() {
     CLEAR;
-    Program::CarArray* carArray = this->manager->getAllCars();
-    std::vector<Program::ISelectable*> carVector = {};
-    for (Program::Auto car : *carArray) {
+    std::vector<Program::ISelectable*> carVector;
+    for (auto& car : this->manager->getAllCarsCopy()) {
+        if (car.getID() == 0) continue;
         carVector.push_back(&car);
     }
-    Program::Auto* pickedCar = (Program::Auto*)Program::Components::listSelector(
-        carVector,
-
-        Program::Auto::countNonEmpty(*carArray), 
-        "Wybierz auto z listy: "
-    );
+    Program::Auto* pickedCar = (Program::Auto*)Program::Components::listSelector(carVector, carVector.size(), "Wybierz auto z listy: ");
 
     if (pickedCar == nullptr || !pickedCar) {
         // error;
@@ -80,16 +75,14 @@ void Program::AppManager::addCarOption() {
 }
 void Program::AppManager::removeCarOption() {
     CLEAR;
-    Program::CarArray* carArray = this->manager->getAllCars();
-    std::vector<Program::ISelectable*> carVector = {};
-    for (Program::Auto car : *carArray) {
+
+    std::vector<Program::ISelectable*> carVector;
+    for (auto& car : this->manager->getAllCarsCopy()) {
+        if (car.getID() == 0) continue;
         carVector.push_back(&car);
     }
-    Program::Auto* pickedCar = (Program::Auto*)Program::Components::listSelector(
-        carVector,
-        Program::Auto::countNonEmpty(*carArray), 
-        "Wybierz auto z listy: "
-    );
+    Program::Auto* pickedCar = (Program::Auto*)Program::Components::listSelector(carVector, carVector.size(), "Wybierz auto z listy: ");
+
     if (pickedCar == nullptr || !pickedCar) {
         CLEAR;
         std::cout << "Nie znaleziono auta! Kod błędu: RCO-1";
@@ -114,17 +107,16 @@ void Program::AppManager::addLogOption() {
     CLEAR;
     Program::Wpis newLog;
     newLog.id = 0;
-    Program::CarArray* carArray = this->manager->getAllCars();
-    std::vector<Program::ISelectable*> carVector = {};
-    for (Program::Auto car : *carArray) {
+
+    std::vector<Program::ISelectable*> carVector;
+    for (auto& car : this->manager->getAllCarsCopy()) {
+        if (car.getID() == 0) continue;
         carVector.push_back(&car);
     }
-    Program::Auto* pickedCar = (Program::Auto*)Program::Components::listSelector(
-        carVector,
+    Program::Auto* pickedCar = (Program::Auto*)Program::Components::listSelector(carVector, carVector.size(), "Wybierz auto z listy: ");
 
-        Program::Auto::countNonEmpty(*carArray), 
-        "Wybierz auto z listy: "
-    );
+
+
     if (pickedCar == nullptr || !pickedCar) {
         CLEAR;
         std::cout << "Nie znaleziono auta! Kod błędu: ALO-1";
