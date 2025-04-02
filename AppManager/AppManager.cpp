@@ -10,7 +10,6 @@ Program::AppManager::AppManager() {
 Program::AppManager::~AppManager() {
     delete this->manager;
 }
-
 void Program::AppManager::displayMenu() {
     std::cout << "[-------MENU-------]\n";
     std::cout << "[ 1 Dodaj Auto     ]\n";
@@ -22,12 +21,56 @@ void Program::AppManager::displayMenu() {
     std::cout << "[ 7 Zapisz         ]\n";
     std::cout << "[ 8 Autosave       ]\n";
     std::cout << "[ 9 Statystyki     ]\n";
+    std::cout << "[ (E) Edytuj wpis  ]\n";
     std::cout << "[ (Z) Cofnij       ]\n";
-    std::cout << "[ (E) Exit         ]\n";
+    std::cout << "[ (X) Exit         ]\n";
     std::cout << "[------------------]\n";
 }
 void Program::AppManager::showAllStats() {
 
+}
+void Program::AppManager::editLog() {
+    CLEAR;
+    Program::Wpis* pickedLog = Program::Wpis::logPicker(this->manager->getAllLogs());
+    if (pickedLog == nullptr || !pickedLog) {
+        CLEAR;
+        std::cout << "Nie znaleziono wpisu! Kod błędu: EL-1";
+        return;
+    }
+    CLEAR;
+    char opt;
+    std::cout << "[ (P) Przebieg]\n";
+    std::cout << "[ (C) Cena    ]\n";
+    std::cout << "[ (I) Ilosc   ]\n";
+    do {
+        std::cout << "Co chcesz edytowac? ";
+        std::cin >> opt;
+    } while (opt != 'P' && opt != 'C' && opt != 'I');
+
+    switch (opt) {
+        case 'P': {
+            std::cout << "Podaj nowy przebieg: ";
+            long int newPrzebieg;
+            std::cin >> newPrzebieg;
+            pickedLog->przebieg = newPrzebieg;
+            break;
+        }
+        case 'C': {
+            std::cout << "Podaj nową cenę: ";
+            float newCena;
+            std::cin >> newCena;
+            pickedLog->cena = newCena;
+            break;
+        }
+        case 'I': {
+            std::cout << "Podaj nową ilość: ";
+            float newIlosc;
+            std::cin >> newIlosc;
+            pickedLog->ilosc = newIlosc;
+            break;
+        }
+    }
+    this->manager->save();
 }
 void Program::AppManager::showStatsOption() {
     CLEAR;
@@ -43,14 +86,12 @@ void Program::AppManager::showStatsOption() {
     }
     CLEAR;
     std::cout << "Wybrano auto: " << pickedCar->getName() << '\n';
-    Program::LogArray& logs = this->manager->getAllLogs();
+    Program::LogArray* logs = this->manager->getAllLogs();
     std::cout << "Ogolne wydatki: " << StatsCalculator::calculateAllTimeExpenses(logs) <<'\n';
-    std::cout << "Miesieczne wydatki: " << StatsCalculator::calculateMonthlyExpenses(logs) << '\n'; 
+    //std::cout << "Miesieczne wydatki: " << StatsCalculator::calculateMonthlyExpenses(logs) << '\n'; 
     std::cout << "Spalanie: " << StatsCalculator::fuelUsage(logs, pickedCar) << "L/100km\n";
 
 }
-
-
 void Program::AppManager::addCarOption() {
     CLEAR;
     Program::Auto newCar;
@@ -80,6 +121,7 @@ void Program::AppManager::removeCarOption() {
     if (pickedCar == nullptr || !pickedCar) {
         CLEAR;
         std::cout << "Nie znaleziono auta! Kod błędu: RCO-1";
+        return;
     } 
     std::cout << "Czy na pewno chcesz usunac: " << pickedCar->getName() << "? (Y/N)";
     char c;
@@ -152,7 +194,7 @@ void Program::AppManager::exitOption(char* opt) {
     char c;
     std::cin >> c;
     if (c == 'Y') {
-        *opt = 'E';
+        *opt = 'X';
     } else {
         *opt = 'A';
     }

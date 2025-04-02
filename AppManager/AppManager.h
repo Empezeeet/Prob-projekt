@@ -28,6 +28,7 @@ namespace Program {
             void toggleAutosave();
             void showAllStats();
             void showStatsOption();
+            void editLog();
 
 
 

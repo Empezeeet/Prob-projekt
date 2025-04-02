@@ -1,13 +1,13 @@
 #include "StatsCalculator.h"
 
-float Program::StatsCalculator::calculateAllTimeExpenses(Program::LogArray& logs) {
+float Program::StatsCalculator::calculateAllTimeExpenses(Program::LogArray* logs) {
     float sum = 0;
-    for (Program::Wpis log : logs) {
+    for (Program::Wpis log : *logs) {
         sum += log.cena;
     }
     return sum;
-}
-float Program::StatsCalculator::calculateMonthlyExpenses(Program::LogArray& logs) {
+}/*
+float Program::StatsCalculator::calculateMonthlyExpenses(Program::LogArray* logs) {
     // FIXME: invalid pointer.
     // TODO: fix this function.
     //return -1;
@@ -24,13 +24,13 @@ float Program::StatsCalculator::calculateMonthlyExpenses(Program::LogArray& logs
 
 
     return sum;
-}
-float Program::StatsCalculator::fuelUsage(LogArray& logs, Program::Auto* car) {
+}*/
+float Program::StatsCalculator::fuelUsage(LogArray* logs, Program::Auto* car) {
     float ilosc = 0;
-    for (int i=logs.size()-1; i>=0; i--) {
-        if (logs.at(i).id == 0) continue;
-        if (logs.at(i).auto_id != car->id) continue;
-        ilosc += logs.at(i).ilosc;
+    for (int i=logs->size()-1; i>=0; i--) {
+        if (logs->at(i).id == 0) continue;
+        if (logs->at(i).auto_id != car->id) continue;
+        ilosc += logs->at(i).ilosc;
     }
     //std::cout << "[Ilosc: " << ilosc << " | " << "Przebieg->car: " << car->przebieg << " | " << "M1: " << "] ";
     return (ilosc)/(car->przebieg)*100;

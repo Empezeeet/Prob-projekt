@@ -46,20 +46,24 @@ int main()
         }
         case '9': { // show stats;
             app->showStatsOption();
+            break;
+        }
+        case 'E': {
+            app->editLog();
+            break;
         }
         case 'Z': { // revert last change.
             // TODO: add CTRL-Z option;
             break;
         }
-        case 'E': { // exit
+        case 'X': { // exit
             app->exitOption(&opt);
-            break;
         }
         }
 
 
 
-    } while (opt != 'E');
+    } while (opt != 'X');
 
 
 

@@ -51,7 +51,7 @@ namespace Program {
                 if (car->getID() == 0 || car == nullptr) continue;
                 carVector.push_back(car);
             }
-            return (Program::Auto*)Program::Components::listSelector(carVector, carVector.size(), "Wybierz auto z listy: ");
+            return (Program::Auto*)Components::listSelector(carVector, carVector.size(), "Wybierz auto z listy: ");
         }
     };
     struct Wpis : public ISelectable {
@@ -66,7 +66,7 @@ namespace Program {
             return this->id;
         }
         std::string getName() const override {
-            return "";
+            return "Wpis " + std::to_string(this->timestamp);
         }
         static int countNonEmpty(std::array<Program::Wpis, 64> logArray) {
             int count=0;
@@ -74,6 +74,15 @@ namespace Program {
                 if (log.id!=0) count++;
             }
             return count;
+        }
+        static Program::Wpis* logPicker(std::array<Program::Wpis, 64>* logArray) {
+            std::vector<Program::ISelectable*> logVector;
+            for (int i=0; i<16; i++) {
+                Program::Wpis* log = &logArray->at(i);
+                if (log->getID() == 0 || log == nullptr) continue;
+                logVector.push_back(log);
+            }
+            return (Program::Wpis*)Components::listSelector(logVector, logVector.size(), "Wybierz wpis z listy: ");
         }
         
     };
@@ -123,7 +132,7 @@ namespace Program {
         void toggleAutosave();
         Program::CarArray* getAllCars();
         Program::CarArray getAllCarsCopy();
-        Program::LogArray& getAllLogs();
+        Program::LogArray* getAllLogs();
     };
 }
 #endif

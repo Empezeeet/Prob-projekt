@@ -145,8 +145,8 @@ Program::Auto* Program::Manager::findCar(int carID)
     }
     return nullptr;
 }
-Program::LogArray& Program::Manager::getAllLogs() {
-    return this->_logs;
+Program::LogArray* Program::Manager::getAllLogs() {
+    return &this->_logs;
 }
 Program::Auto* Program::Manager::findCar(std::string name)
 {

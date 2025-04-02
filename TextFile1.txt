@@ -29,7 +29,7 @@
 4. Funkcje do operacji na strukturach i tablicach
 
 	Dodawanie Aut oraz wpisow. T
-	Edycja wpisow. //TODO: edycja wpisow.
+	Edycja wpisow. T
 	Usuwanie wpisow oraz Aut. T
 
 	Funkcja autosave po kazdej edycji. (Dodawanie/Usuwanie/Edycja). T
@@ -37,7 +37,6 @@
 
 	Wyswietlanie aut, wpisow oraz statystyk T
 
-	Sortowanie wyswietlania wpisow po cenie, dacie, ilosci paliwa. // TODO: sortuj wpisy.
 
 5. Obsluga wejscia/wyjscia
 	Wczytywanie danych od uzytkownika (np. cin dla warto�ci wprowadzanych z klawiatury). T

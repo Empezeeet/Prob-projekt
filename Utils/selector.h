@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <iostream>
-#include "../Manager/Manager.h"
 #include "../Interfaces/ISelectable.h"
 namespace Program {
     class Components {
