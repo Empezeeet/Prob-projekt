@@ -13,22 +13,18 @@ int main()
 
 
         switch (opt) {
-        case '1': { // add car
+        case '1':
             app->addCarOption();
             break;
-        }
-        case '2': { // remove car
+        case '2':
             app->removeCarOption();
             break;
-        }
-        case '3': { // add new log to car;
+        case '3': 
             app->addLogOption();
             break;
-        }
-        case '4': { // print all cars
+        case '4': 
             app->showAllCars();
             break;
-        }
         case '5': { // print all fuel logs
             app->showAllLogs();
             break;

@@ -108,7 +108,6 @@ namespace Program {
 
 
 
-        void autoSave();
         
         void defragmentation();
         
@@ -119,6 +118,7 @@ namespace Program {
     public:
         Manager(std::string filePath = carSaveFilePath, std::string logsPath = logSaveFilePath);
         ~Manager();
+        void autoSave();
         Auto* findCar(int carID);
         Auto* findCar(std::string name);
         int addCar(Auto car);
@@ -130,6 +130,12 @@ namespace Program {
         void printLogs();
         int save();
         int load();
+
+        void savePreChange();
+        void loadPreChange();
+
+
+
         void test();
         void calculateStats();
         void toggleAutosave();

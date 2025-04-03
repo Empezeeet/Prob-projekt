@@ -72,7 +72,7 @@ void Program::AppManager::editLog() {
             break;
         }
     }
-    this->manager->save();
+    this->manager->autoSave();
 }
 void Program::AppManager::showStatsOption() {
     CLEAR;

@@ -1,0 +1,113 @@
+1. Struktura Auto T
+
+struct Auto {
+    int id;                    // unikalne ID auta
+    std::string nazwa;         // np. „Toyota Corolla”
+    long int przebieg;         // aktualny przebieg pojazdu
+};
+
+2. Struktura Wpis T
+
+struct Wpis {
+    int auto_id;               // ID auta, do którego odnosi się wpis
+    long int przebieg;         // przebieg w momencie tankowania
+    float cena;                // cena paliwa za litr
+    float ilosc;               // ilość paliwa zatankowanego
+    long int timestamp;        // data/godzina jako liczba (np. UNIX timestamp)
+};
+
+II. Przechowywanie danych
+Tablice o stałej wielkości (zgodnie z opisem projektu):
+
+const int MAX_AUT = 16;
+const int MAX_WPISOW = 64;
+
+Auto auta[MAX_AUT];
+int liczbaAut = 0; T
+
+Wpis wpisy[MAX_WPISOW];
+int liczbaWpisow = 0; T
+
+III. Funkcje główne
+1. Operacje CRUD (Dodawanie/Edycja/Usuwanie)
+
+void dodajAuto(Auto auta[], int& liczbaAut); T
+void dodajWpis(Wpis wpisy[], int& liczbaWpisow, const Auto auta[], int liczbaAut); T
+
+void edytujWpis(Wpis wpisy[], int liczbaWpisow); T
+void usunWpis(Wpis wpisy[], int& liczbaWpisow, int indeks); // TODO: usun wpis
+void usunAuto(Auto auta[], int& liczbaAut, int id); T
+
+2. Funkcje dodatkowe
+void wyswietlAuta(...) T
+void wyswietlWpisy(...) T
+void sortujAutaPoNazwie(...) // TODO: wyswietlanie po sortowaniu.
+void sortujAutaPoPrzebiegu(...) // TODO: wyswietlanie po sortowaniu.
+void sortujWpisyPoCenie(...) // TODO: wyswietlanie po sortowaniu. 
+void sortujWpisyPoDacie(...) // TODO: wyswietlanie po sortowaniu.
+void sortujWpisyPoIlosci(...) // TODO: wyswietlanie po sortowaniu.
+void wyszukajAutoPoNazwie(...) // TODO: wyszukiwanie auta 1/2
+void wyszukajWpisPoDacie(...) // TODO: wyszukiwanie auta 1/2
+
+IV. Obliczenia i statystyki
+
+float obliczSredniaCenePaliwa(const Wpis wpisy[], int liczbaWpisow); // TODO: srednia cena paliwa
+float obliczKosztNaKilometr(const Wpis wpisy[], int liczbaWpisow); // TODO: koszt na kilometr
+float obliczMiesieczneWydatki(const Wpis wpisy[], int liczbaWpisow, long int timestamp_start, long int timestamp_end); // TODO: miesieczne wydatki
+
+V. Mechanizm cofania zmian i autosave
+1. Bufor zmian // TODO: CTRL-Z
+Przechowywanie kopii stanu przed edycją:
+
+
+Auto kopiaAut[MAX_AUT];
+int kopiaLiczbaAut;
+
+Wpis kopiaWpisy[MAX_WPISOW];
+int kopiaLiczbaWpisow;
+
+void zapiszStan();   // kopiowanie danych przed zmianą
+void cofnijZmiany(); // przywrócenie danych z kopii
+
+2. Autosave
+Po każdej modyfikacji (dodanie, edycja, usunięcie), dane są zapisywane automatycznie do pliku:
+
+
+void zapiszDoPliku(...);
+void wczytajZPliku(...);
+
+VI. Obsługa błędów i zabezpieczenia
+Sprawdzenie poprawności danych (np. cena > 0, ilość paliwa > 0)
+Ograniczenia tablic: brak możliwości dodania wpisu przy pełnym zakresie
+Komunikaty przy błędach odczytu pliku
+Walidacja typu danych z std::cin.fail()
+
+
+VII. Menu użytkownika (interfejs konsolowy)
+
+=== KALKULATOR KOSZTÓW EKSPLOATACJI AUTA ===
+1. Dodaj auto
+2. Dodaj wpis paliwowy
+3. Edytuj wpis
+4. Usuń wpis lub auto
+5. Wyświetl wszystkie auta
+6. Wyświetl wszystkie wpisy
+7. Oblicz statystyki (średnia cena paliwa, koszt/km, miesięczne wydatki)
+8. Wyszukaj wpisy po dacie
+9. Sortowanie wpisów/pojazdów
+10. Cofnij ostatnią zmianę
+11. Zapisz do pliku
+12. Wczytaj z pliku
+0. Wyjście
+
+
+VIII. Testowanie
+Scenariusze testowe:
+dodanie więcej niż 16 aut → powinien pojawić się komunikat o przepełnieniu T
+edycja wpisu z nieprawidłowym indeksem nie dot.
+cofnięcie usunięcia i sprawdzenie stanu // TODO: test ctrlz and delete
+poprawność obliczeń dla średniej ceny i kosztu/km T
+zapis i odczyt danych T
+
+IX. Możliwości dalszego rozwoju
+eksport danych do CSV (dla arkuszy kalkulacyjnych) // TODO: export to CSV

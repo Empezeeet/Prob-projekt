@@ -1,7 +1,8 @@
 
 #include "Manager.h"
 
-
+#define PRECHANGE_CAR_FILE "saves/preChangeCar.txt"
+#define PRECHANGE_LOG_FILE "saves/preChangeLog.txt"
 
 
 
@@ -160,6 +161,29 @@ void Program::Manager::test() {
 }
 Program::CarArray* Program::Manager::getAllCars() {
     return &this->_cars;
+}
+void Program::Manager::savePreChange() {
+    this->defragmentation();
+    std::ofstream carFile(PRECHANGE_CAR_FILE);
+    if (!carFile) {
+        std::cout << "Nie mozna zapisac. Kod błłedu: SPC-1\n";
+        return;
+    }
+    for (const Auto& car : this->_cars) {
+        carFile << car.id << " " << replaceString(car.nazwa, ' ', '_') << " " << car.przebieg << '\n';
+    }
+    // logs
+    carFile.close();
+    std::ofstream file2(PRECHANGE_LOG_FILE);
+    if (!file2) {
+        std::cout << "Nie można zapisać do pliku wpisów!. Kod błędu: SPC-2\n";
+        return;
+    }
+    for (const Wpis& log : this->_logs) {
+        file2 << log.id << " " << log.auto_id << " " << log.cena << " " << log.ilosc << " " << log.przebieg << "\n";
+    }
+    file2.close();
+    
 }
 int Program::Manager::save() {
     this->defragmentation();
