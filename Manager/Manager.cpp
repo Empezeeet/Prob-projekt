@@ -111,7 +111,6 @@ void Program::Manager::printLogs()
     std::cout << "|-------------\n";
     for (const auto& log : this->_logs) {
         if (log.id == 0 ) continue;
-        // FIXME: date is not converted from timestamp;
         std::cout << "[ DATA WPISU: " << std::ctime(&log.timestamp) << "\t\n";
         std::cout << "[ NAZWA AUTA: " << this->findCar(log.auto_id)->nazwa << "\t\n";
         std::cout << "[ Ilosc: " << log.ilosc << "\t\n";

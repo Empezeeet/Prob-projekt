@@ -89,6 +89,8 @@ namespace Program {
     
     typedef std::array<Program::Wpis, 64> LogArray;
     typedef std::array<Program::Auto, 16> CarArray;
+
+
     class Manager
     {
     private:
@@ -109,8 +111,7 @@ namespace Program {
         void autoSave();
         
         void defragmentation();
-        Auto* findCar(int carID);
-        Auto* findCar(std::string name);
+        
 
 
 
@@ -118,6 +119,8 @@ namespace Program {
     public:
         Manager(std::string filePath = carSaveFilePath, std::string logsPath = logSaveFilePath);
         ~Manager();
+        Auto* findCar(int carID);
+        Auto* findCar(std::string name);
         int addCar(Auto car);
         int removeCar(int carID);
         int removeCar(std::string name);

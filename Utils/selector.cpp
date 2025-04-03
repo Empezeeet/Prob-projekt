@@ -6,7 +6,6 @@
 #endif
 Program::ISelectable* Program::Components::listSelector(std::vector<Program::ISelectable*>& items, int size, std::string message) {
     int count = 0;
-    std::cout << "size: " << items.size() << "\n";
     if (items.size() == 0) {
         std::cout << "Lista nie moze byc pusta!\n";
         return nullptr;
@@ -16,7 +15,7 @@ Program::ISelectable* Program::Components::listSelector(std::vector<Program::ISe
         if (items[count] == nullptr) {
             continue;
         }
-        std::cout << "[" << count+1 << "] " << items[count]->getName() << '\n'; // FIXME: segfault here.
+        std::cout << "[" << count+1 << "] " << items[count]->getName() << '\n';
     }
     if (count == 0) {
         return nullptr;

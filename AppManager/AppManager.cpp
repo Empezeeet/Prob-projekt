@@ -22,7 +22,7 @@ void Program::AppManager::displayMenu() {
     std::cout << "[ 8 Autosave       ]\n";
     std::cout << "[ 9 Statystyki     ]\n";
     std::cout << "[ (E) Edytuj wpis  ]\n";
-    std::cout << "[ (Z) Cofnij       ]\n";
+    //std::cout << "[ (Z) Cofnij       ]\n";
     std::cout << "[ (X) Exit         ]\n";
     std::cout << "[------------------]\n";
 }
@@ -39,6 +39,7 @@ void Program::AppManager::editLog() {
     }
     CLEAR;
     char opt;
+    std::cout << "[=== OPCJE ===]\n";
     std::cout << "[ (P) Przebieg]\n";
     std::cout << "[ (C) Cena    ]\n";
     std::cout << "[ (I) Ilosc   ]\n";
@@ -53,6 +54,7 @@ void Program::AppManager::editLog() {
             long int newPrzebieg;
             std::cin >> newPrzebieg;
             pickedLog->przebieg = newPrzebieg;
+            this->manager->findCar(pickedLog->auto_id)->przebieg = newPrzebieg;
             break;
         }
         case 'C': {
@@ -74,7 +76,6 @@ void Program::AppManager::editLog() {
 }
 void Program::AppManager::showStatsOption() {
     CLEAR;
-    // fixed segfault???
     Program::Auto* pickedCar = Program::Auto::carPicker(this->manager->getAllCars());
 
  
@@ -98,14 +99,14 @@ void Program::AppManager::addCarOption() {
     std::cout << "Podaj nazwe auta: ";
     std::cin.ignore(1000, '\n');
     std::getline(std::cin, newCar.nazwa);
-    std::cout << "Podaj przebieg w kilometrach: ";
     do {
+        std::cout << "Podaj przebieg w kilometrach: ";
         std::cin >> newCar.przebieg;
     } while (newCar.przebieg < 0);
     newCar.id = 0;
 
     int res = this->manager->addCar(newCar);
-    if (res == -2 ) {
+    if (res == -2) {
         CLEAR;
         std::cout << "Brak wolnych miejsc na auto!\n";
         return; 
@@ -114,7 +115,7 @@ void Program::AppManager::addCarOption() {
 void Program::AppManager::removeCarOption() {
     CLEAR;
 
-     // fixed segfault???
+     // fixed segfault
      Program::Auto* pickedCar = Program::Auto::carPicker(this->manager->getAllCars());
 
  
@@ -143,7 +144,7 @@ void Program::AppManager::addLogOption() {
     CLEAR;
     Program::Wpis newLog;
     newLog.id = 0;
-    // fixed segfault???
+    // fixed segfault
     Program::Auto* pickedCar = Program::Auto::carPicker(this->manager->getAllCars());
 
     if (pickedCar == nullptr || !pickedCar) {
@@ -181,6 +182,8 @@ void Program::AppManager::loadOption() {
     std::cin >> c;
     if (c == 'Y') {
         this->manager->load();
+    } else {
+        std::cout << "Nie wczytano danych.\n";
     }
 }
 void Program::AppManager::saveOption() {
