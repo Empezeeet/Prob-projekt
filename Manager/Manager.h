@@ -4,9 +4,13 @@
 #if _WIN32
 #define carSaveFilePath "C:\\cars.txt"
 #define logSaveFilePath "C:\\logs.txt"
+#define carPreSaveFilePath "C:\\carsPre.txt"
+#define logPreSaveFilePath "C:\\logsPre.txt"
 #else
 #define carSaveFilePath "saves/carsSave.txt"
 #define logSaveFilePath "saves/logsSave.txt"
+#define carPreSaveFilePath "saves/carsPre.txt"
+#define logPreSaveFilePath "saves/logsPre.txt"
 #endif
 
 
