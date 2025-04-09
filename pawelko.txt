@@ -45,9 +45,9 @@ void wyswietlWpisy(...) T
     void sortujAutaPoNazwie(...)    // T(O)DO: wyswietlanie po nazwie
     void sortujAutaPoPrzebiegu(...) // T(O)DO: wyswietlanie po sortowaniu.
 
-void sortujWpisyPoCenie(...) // TODO: wyswietlanie po sortowaniu. 
-void sortujWpisyPoDacie(...) // TODO: wyswietlanie po sortowaniu.
-void sortujWpisyPoIlosci(...) // TODO: wyswietlanie po sortowaniu.
+void sortujWpisyPoCenie(...)
+void sortujWpisyPoDacie(...)
+void sortujWpisyPoIlosci(...) 
 
 void wyszukajAutoPoNazwie(...) T
 void wyszukajWpisPoDacie(...) T
