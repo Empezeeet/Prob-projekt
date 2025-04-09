@@ -35,7 +35,7 @@ void dodajAuto(Auto auta[], int& liczbaAut); T
 void dodajWpis(Wpis wpisy[], int& liczbaWpisow, const Auto auta[], int liczbaAut); T
 
 void edytujWpis(Wpis wpisy[], int liczbaWpisow); T
-void usunWpis(Wpis wpisy[], int& liczbaWpisow, int indeks); // TODO: usun wpis
+void usunWpis(Wpis wpisy[], int& liczbaWpisow, int indeks); // TODO: zaimplementowac
 void usunAuto(Auto auta[], int& liczbaAut, int id); T
 
 2. Funkcje dodatkowe
@@ -53,10 +53,10 @@ IV. Obliczenia i statystyki
 
 float obliczSredniaCenePaliwa(const Wpis wpisy[], int liczbaWpisow); // TODO: srednia cena paliwa
 float obliczKosztNaKilometr(const Wpis wpisy[], int liczbaWpisow); // TODO: koszt na kilometr
-float obliczMiesieczneWydatki(const Wpis wpisy[], int liczbaWpisow, long int timestamp_start, long int timestamp_end); // TODO: miesieczne wydatki
+float obliczMiesieczneWydatki(const Wpis wpisy[], int liczbaWpisow, long int timestamp_start, long int timestamp_end); T
 
-V. Mechanizm cofania zmian i autosave
-1. Bufor zmian // TODO: CTRL-Z
+V. Mechanizm cofania zmian i autosave T
+1. Bufor zmian T
 Przechowywanie kopii stanu przed edycją:
 
 
@@ -105,7 +105,7 @@ VIII. Testowanie
 Scenariusze testowe:
 dodanie więcej niż 16 aut → powinien pojawić się komunikat o przepełnieniu T
 edycja wpisu z nieprawidłowym indeksem nie dot.
-cofnięcie usunięcia i sprawdzenie stanu // TODO: test ctrlz and delete
+cofnięcie usunięcia i sprawdzenie stanu T
 poprawność obliczeń dla średniej ceny i kosztu/km T
 zapis i odczyt danych T
 

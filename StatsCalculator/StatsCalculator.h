@@ -15,7 +15,7 @@ namespace Program {
             - 
         */
         static float calculateAllTimeExpenses(LogArray* logs);
-        static float calculateMonthlyExpenses(LogArray* logs);
+        static float calculateMonthlyExpenses(LogArray logs);
         static float fuelUsage(LogArray* logs, Program::Auto* car);
         
 

@@ -55,7 +55,6 @@ int main()
             break;
         }
         case 'Z': { // revert last change.
-            // TODO: add CTRL-Z option;
             app->preLoad();
             break;
         }

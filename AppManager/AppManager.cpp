@@ -106,10 +106,10 @@ void Program::AppManager::showStatsOption() {
     }
     CLEAR;
     std::cout << "Wybrano auto: " << pickedCar->getName() << '\n';
-    Program::LogArray* logs = this->manager->getAllLogs();
-    std::cout << "Ogolne wydatki: " << StatsCalculator::calculateAllTimeExpenses(logs) <<'\n';
-    //std::cout << "Miesieczne wydatki: " << StatsCalculator::calculateMonthlyExpenses(logs) << '\n'; 
-    std::cout << "Spalanie: " << StatsCalculator::fuelUsage(logs, pickedCar) << "L/100km\n";
+    Program::LogArray logs = this->manager->getAllLogsCopy();
+    std::cout << "Ogolne wydatki: " << StatsCalculator::calculateAllTimeExpenses(&logs) <<'\n';
+    std::cout << "Miesieczne wydatki: " << StatsCalculator::calculateMonthlyExpenses(logs) << '\n'; 
+    std::cout << "Spalanie: " << StatsCalculator::fuelUsage(&logs, pickedCar) << "L/100km\n";
 
 }
 void Program::AppManager::addCarOption() {

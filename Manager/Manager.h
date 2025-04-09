@@ -145,6 +145,7 @@ namespace Program {
         Program::CarArray* getAllCars();
         Program::CarArray getAllCarsCopy();
         Program::LogArray* getAllLogs();
+        Program::LogArray getAllLogsCopy();
     };
 }
 #endif

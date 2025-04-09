@@ -127,11 +127,11 @@ void Program::Manager::printLogs()
     std::cout << "|-------------\n";
     for (const Program::Wpis& log : this->_logs) {
         if (log.id == 0 ) continue;
-        std::cout << "[ DATA WPISU: " << std::ctime(&log.timestamp) << "\t\n";
-        std::cout << "[ NAZWA AUTA: " << this->findCar(log.auto_id)->nazwa << "\t\n";
-        std::cout << "[ Ilosc: " << log.ilosc << "\t\n";
-        std::cout << "[ Cena: " << log.cena << "\t\n";
-        std::cout << "[ PRZEBIEG: " << log.przebieg << "\t\n";
+        std::cout << "[ DATA WPISU: " << std::ctime(&log.timestamp) << "";
+        std::cout << "[ NAZWA AUTA: " << this->findCar(log.auto_id)->nazwa << "\n";
+        std::cout << "[ Ilosc: " << log.ilosc << "\n";
+        std::cout << "[ Cena: " << log.cena << "\n";
+        std::cout << "[ PRZEBIEG: " << log.przebieg << "\n";
         std::cout << "|-------------\n";
     }
 }
@@ -162,6 +162,9 @@ Program::Auto* Program::Manager::findCar(int carID)
 }
 Program::LogArray* Program::Manager::getAllLogs() {
     return &this->_logs;
+}
+Program::LogArray Program::Manager::getAllLogsCopy() {
+    return this->_logs;
 }
 Program::Auto* Program::Manager::findCar(std::string name)
 {
@@ -197,7 +200,11 @@ int Program::Manager::save(std::string pathCar, std::string pathLog) {
         return -2;
     }
     for (const Wpis& log : this->_logs) {
-        file2 << log.id << " " << log.auto_id << " " << log.cena << " " << log.ilosc << " " << log.przebieg << "\n";
+     
+        file2 << log.id << " " << log.auto_id 
+            << " " << log.cena << " " << log.ilosc 
+            << " " << log.przebieg << " " << (long long)log.timestamp 
+            <<"\n";
     }
     file2.close();
     return 0;
@@ -231,11 +238,13 @@ int Program::Manager::load(std::string pathCar, std::string pathLog)
     this->_logs.fill({});
     Program::Wpis log;
     count = 0;
-    while (logFile >> log.id) {
+    while (!logFile.eof()) {
+        logFile >> log.id;
         logFile >> log.auto_id;
         logFile >> log.cena;
         logFile >> log.ilosc;
         logFile >> log.przebieg;
+        logFile >> log.timestamp;
         this->_logs[count] = log;
         count++;
     } 
