@@ -29,7 +29,8 @@ namespace Program {
             void showAllStats();
             void showStatsOption();
             void editLog();
-
+            void preSave();
+            void preLoad();
 
 
 

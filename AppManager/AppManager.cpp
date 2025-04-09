@@ -4,8 +4,12 @@
 #else
 #define CLEAR system("clear")
 #endif
+
+
+
 Program::AppManager::AppManager() {
     this->manager = new Program::Manager();
+    
 }
 Program::AppManager::~AppManager() {
     delete this->manager;
@@ -22,13 +26,27 @@ void Program::AppManager::displayMenu() {
     std::cout << "[ 8 Autosave       ]\n";
     std::cout << "[ 9 Statystyki     ]\n";
     std::cout << "[ (E) Edytuj wpis  ]\n";
-    //std::cout << "[ (Z) Cofnij       ]\n";
+    std::cout << "[ (Z) Cofnij       ]\n";
     std::cout << "[ (X) Exit         ]\n";
     std::cout << "[------------------]\n";
 }
 void Program::AppManager::showAllStats() {
 
 }
+void Program::AppManager::preSave() {
+    CLEAR;
+    this->manager
+}
+void Program::AppManager::preLoad() {
+    CLEAR;
+}
+
+
+
+
+
+
+
 void Program::AppManager::editLog() {
     CLEAR;
     Program::Wpis* pickedLog = Program::Wpis::logPicker(this->manager->getAllLogs());

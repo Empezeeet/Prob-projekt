@@ -14,6 +14,7 @@ void Program::Manager::autoSave() {
 Program::Manager::Manager(std::string filePath, std::string logsPath) {
 	this->carsFile = filePath;
     this->logsFile = logsPath;
+    std::srand(time(nullptr));
 
 }
 Program::Manager::~Manager()
@@ -22,13 +23,21 @@ Program::Manager::~Manager()
 Program::CarArray Program::Manager::getAllCarsCopy() {
     return this->_cars;
 }
+int Program::Manager::generateID(Program::Auto* car) {
+    car->id = car->przebieg + ((std::rand()%9999)+1000);
+    return 0;
+}
+int Program::Manager::generateID(Program::Wpis* log) {
+    log->id = log->przebieg + ((std::rang()%9999)+1000);
+    return 0;
+}
 int Program::Manager::addCar(Program::Auto car) {
-    //FIXME: use RNG to generate id.
     if (car.id != 0) return -1; // id is auto-generated;
     // auto-gen car.id;
-    car.id = car.przebieg + this->_carCount + 1;
+    this->generateID(&car);
     
     if (++this->_carCount >= 16) {
+        --this->_carCount;
         return -2; // no space left
     }
     // add to array;
@@ -67,9 +76,9 @@ int Program::Manager::removeCar(std::string name)
 }
 int Program::Manager::addLog(Wpis log)
 {
-    // FIXME: use RNG to get id. 
     if (log.id != 0) return -1;
-    log.id = log.przebieg + 2 + this->_logCount;
+    this->generateID(&log);
+    
     this->_logs[this->_logCount++] = log;
     this->findCar(log.auto_id)->przebieg = log.przebieg;
     this->defragmentation();
@@ -162,33 +171,10 @@ void Program::Manager::test() {
 Program::CarArray* Program::Manager::getAllCars() {
     return &this->_cars;
 }
-void Program::Manager::savePreChange() {
+int Program::Manager::save(std::string pathCar, std::string pathLog) {
     this->defragmentation();
-    std::ofstream carFile(PRECHANGE_CAR_FILE);
-    if (!carFile) {
-        std::cout << "Nie mozna zapisac. Kod błłedu: SPC-1\n";
-        return;
-    }
-    for (const Auto& car : this->_cars) {
-        carFile << car.id << " " << replaceString(car.nazwa, ' ', '_') << " " << car.przebieg << '\n';
-    }
-    // logs
-    carFile.close();
-    std::ofstream file2(PRECHANGE_LOG_FILE);
-    if (!file2) {
-        std::cout << "Nie można zapisać do pliku wpisów!. Kod błędu: SPC-2\n";
-        return;
-    }
-    for (const Wpis& log : this->_logs) {
-        file2 << log.id << " " << log.auto_id << " " << log.cena << " " << log.ilosc << " " << log.przebieg << "\n";
-    }
-    file2.close();
-    
-}
-int Program::Manager::save() {
-    this->defragmentation();
-
-    std::ofstream file(this->carsFile);
+    // car
+    std::ofstream file(pathCar);
     if (!file) {
         std::cout << "Nie można zapisać do pliku aut!. Kod błędu SAV-1\n";
         return -1;
@@ -198,7 +184,8 @@ int Program::Manager::save() {
         file << car.id << " " << replaceString(car.nazwa, ' ', '_') << " " << car.przebieg << '\n';
     }
     file.close();
-    std::ofstream file2(this->logsFile);
+    // log
+    std::ofstream file2(pathLog);
     if (!file2) {
         std::cout << "Nie można zapisać do pliku wpisów!. Kod błędu: SAV-2\n";
         return -2;
@@ -209,9 +196,10 @@ int Program::Manager::save() {
     file2.close();
     return 0;
 }
-int Program::Manager::load()
+int Program::Manager::load(std::string pathCar, std::string pathLog)
 {
-    std::ifstream file(this->carsFile);
+    // car
+    std::ifstream file(pathCar);
     if (!file) {
         std::cout << "Nie można otworzyć pliku aut!. Kod błędu: PML-1\n";
         return -1;
@@ -229,7 +217,7 @@ int Program::Manager::load()
     this->_carCount = count;
     file.close();
     // load logs from file
-    std::ifstream logFile(this->logsFile);
+    std::ifstream logFile(pathLog);
     if (!logFile) {
         std::cout << "Nie można otowrzyć pliku wpisów! Kod błędu: PML-2\n";
         return -2;

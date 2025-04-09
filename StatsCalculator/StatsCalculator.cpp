@@ -8,7 +8,7 @@ float Program::StatsCalculator::calculateAllTimeExpenses(Program::LogArray* logs
     return sum;
 }/*
 float Program::StatsCalculator::calculateMonthlyExpenses(Program::LogArray* logs) {
-    // FIXME: invalid pointer.
+    // error: invalid pointer. in timestamp conversion.
     // TODO: fix this function.
     //return -1;
     float sum = 0;

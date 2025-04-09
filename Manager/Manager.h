@@ -29,6 +29,7 @@
 
 
 
+
 namespace Program {
     
     struct Auto : public ISelectable {
@@ -132,12 +133,10 @@ namespace Program {
         int removeLog(int logID);
         void printCars();
         void printLogs();
-        int save();
-        int load();
-
-        void savePreChange();
-        void loadPreChange();
-
+        int save(std::string pathCar = carSaveFilePath, std::string pathLog = logSaveFilePath);
+        int load(std::string pathCar = carSaveFilePath, std::string pathLog = logSaveFilePath);
+        int generateID(Program::Car* car);
+        int generateID(Program::Wpis* log);
 
 
         void test();

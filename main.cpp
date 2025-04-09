@@ -39,6 +39,7 @@ int main()
         }
         case '8': { // toggle autosave;
             app->toggleAutosave();
+            break;
         }
         case '9': { // show stats;
             app->showStatsOption();
