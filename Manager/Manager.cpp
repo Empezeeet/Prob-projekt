@@ -24,11 +24,17 @@ Program::CarArray Program::Manager::getAllCarsCopy() {
     return this->_cars;
 }
 int Program::Manager::generateID(Program::Auto* car) {
-    car->id = car->przebieg + ((std::rand()%9999)+1000);
+    do {
+        car->id = car->przebieg + ((std::rand()%9999)+1000);
+    } while (this->findCar(car->id) != nullptr);
+    
     return 0;
 }
 int Program::Manager::generateID(Program::Wpis* log) {
-    log->id = log->przebieg + ((std::rand()%9999)+1000);
+    do {
+        log->id = log->przebieg + ((std::rand()%9999)+1000);
+    } while (this->findLog(log->id) != nullptr);
+    
     return 0;
 }
 int Program::Manager::addCar(Program::Auto car) {
@@ -78,20 +84,19 @@ int Program::Manager::addLog(Wpis log)
 {
     if (log.id != 0) return -1;
     this->generateID(&log);
-    
+    if (this->_logCount == 0) log.previousPrzebieg = 0;
+
     this->_logs[this->_logCount++] = log;
+    log.previousPrzebieg = this->findCar(log.auto_id)->przebieg;
     this->findCar(log.auto_id)->przebieg = log.przebieg;
     this->defragmentation();
     this->autoSave();
     return 0;
 }
 int Program::Manager::removeLog(int logID) {
-    for (Program::Wpis& log : this->_logs) {
-        if (log.id==logID) {
-            log = {};
-            break;
-        }
-    }
+    Program::Wpis* log = this->findLog(logID);
+    this->findCar(log->auto_id)->przebieg = log->previousPrzebieg;
+    *log = {};
     this->defragmentation();
     this->autoSave();
     return 0;
@@ -152,6 +157,16 @@ void Program::Manager::defragmentation() {
         count++;
     }
 }
+Program::Wpis* Program::Manager::findLog(int logID) {
+    for (int i=0; i<64; i++) {
+        if (this->_logs.at(i).id != logID) continue;
+        return &this->_logs.at(i);
+    }
+    return nullptr;
+}
+
+
+
 Program::Auto* Program::Manager::findCar(int carID)
 {
     for (int i = 0; i < 16; i++) {
@@ -159,12 +174,6 @@ Program::Auto* Program::Manager::findCar(int carID)
         return &this->_cars[i];
     }
     return nullptr;
-}
-Program::LogArray* Program::Manager::getAllLogs() {
-    return &this->_logs;
-}
-Program::LogArray Program::Manager::getAllLogsCopy() {
-    return this->_logs;
 }
 Program::Auto* Program::Manager::findCar(std::string name)
 {
@@ -174,6 +183,13 @@ Program::Auto* Program::Manager::findCar(std::string name)
     }    
     return nullptr;
 }
+Program::LogArray* Program::Manager::getAllLogs() {
+    return &this->_logs;
+}
+Program::LogArray Program::Manager::getAllLogsCopy() {
+    return this->_logs;
+}
+
 void Program::Manager::test() {
    
 }
@@ -201,10 +217,13 @@ int Program::Manager::save(std::string pathCar, std::string pathLog) {
     }
     for (const Wpis& log : this->_logs) {
      
-        file2 << log.id << " " << log.auto_id 
-            << " " << log.cena << " " << log.ilosc 
-            << " " << log.przebieg << " " << (long long)log.timestamp 
-            <<"\n";
+        file2 << log.id 
+            << " " << log.auto_id 
+            << " " << log.cena 
+            << " " << log.ilosc 
+            << " " << log.przebieg 
+            << " " << (long long)log.timestamp 
+            << " " << log.previousPrzebieg << "\n";
     }
     file2.close();
     return 0;
@@ -245,6 +264,7 @@ int Program::Manager::load(std::string pathCar, std::string pathLog)
         logFile >> log.ilosc;
         logFile >> log.przebieg;
         logFile >> log.timestamp;
+        logFile >> log.previousPrzebieg;
         this->_logs[count] = log;
         count++;
     } 

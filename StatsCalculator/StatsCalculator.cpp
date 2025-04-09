@@ -2,11 +2,9 @@
 
 float Program::StatsCalculator::calculateAllTimeExpenses(Program::LogArray* logs) {
     float sum = 0;
-    for (Program::Wpis log : *logs) {
-        sum += log.cena;
-    }
-    return sum;
+    for (Program::Wpis log : *logs) sum += log.cena;
     
+    return sum; 
 }
 float Program::StatsCalculator::calculateMonthlyExpenses(Program::LogArray logs) {
     std::time_t currentTimestamp;
@@ -22,7 +20,16 @@ float Program::StatsCalculator::calculateMonthlyExpenses(Program::LogArray logs)
     }
     return sum;
 }
+float Program::StatsCalculator::averageFuelPrice(LogArray* logs) {
+    float sum = 0;
+    int count = 0;
 
+    for (; count<logs->size(); count++) 
+        sum += logs->at(count).cena / logs->at(count).ilosc;
+    
+    if (count == 0) return 0;
+    return sum/count;
+}
 float Program::StatsCalculator::fuelUsage(LogArray* logs, Program::Auto* car) {
     float ilosc = 0;
     for (int i=logs->size()-1; i>=0; i--) {
@@ -30,9 +37,17 @@ float Program::StatsCalculator::fuelUsage(LogArray* logs, Program::Auto* car) {
         if (logs->at(i).auto_id != car->id) continue;
         ilosc += logs->at(i).ilosc;
     }
-    //std::cout << "[Ilosc: " << ilosc << " | " << "Przebieg->car: " << car->przebieg << " | " << "M1: " << "] ";
     return (ilosc)/(car->przebieg)*100;
 }
-
+float Program::StatsCalculator::pricePerKilometer(LogArray* logs) { 
+    float moneySum = 0;
+    float distance = 0;
+    for (int i=0; i<logs->size(); i++) {
+        moneySum += logs->at(i).cena;
+        distance += logs->at(i).przebieg - logs->at(i).previousPrzebieg;
+    }
+    if (distance == 0) return 0;
+    return moneySum/distance;
+}
 
 

@@ -28,39 +28,35 @@ int main()
         case '4': 
             app->showAllCars();
             break;
-        case '5': { // print all fuel logs
+        case '5': // print all fuel logs
             app->showAllLogs();
             break;
-        }
-        case '6': { // load
+        case '6': // load
             app->preSave();
             app->loadOption();
             break;
-        }
-        case '7': { // save
+        case '7': // save
             app->saveOption();
             break;
-        }
-        case '8': { // toggle autosave;
+        case '8': // toggle autosave;
             app->toggleAutosave();
             break;
-        }
-        case '9': { // show stats;
+        case '9': // show stats;
             app->showStatsOption();
             break;
-        }
-        case 'E': {
+        case 'U': // remove log
+            app->preSave();
+            app->removeLogOption();
+            break;
+        case 'E': // edit log 
             app->preSave();
             app->editLog();
             break;
-        }
-        case 'Z': { // revert last change.
+        case 'Z': // revert last change.
             app->preLoad();
             break;
-        }
-        case 'X': { // exit
+        case 'X': // exit
             app->exitOption(&opt);
-        }
         }
 
 

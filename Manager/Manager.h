@@ -62,6 +62,7 @@ namespace Program {
     struct Wpis : public ISelectable {
         int id;
         int auto_id;
+        long int previousPrzebieg;
         long int przebieg;
         float cena;
         float ilosc;
@@ -124,8 +125,9 @@ namespace Program {
         Manager(std::string filePath = carSaveFilePath, std::string logsPath = logSaveFilePath);
         ~Manager();
         void autoSave();
-        Auto* findCar(int carID);
-        Auto* findCar(std::string name);
+        Program::Auto* findCar(int carID);
+        Program::Auto* findCar(std::string name);
+        Program::Wpis* findLog(int logID);
         int addCar(Auto car);
         int removeCar(int carID);
         int removeCar(std::string name);

@@ -25,11 +25,13 @@ void Program::AppManager::displayMenu() {
     std::cout << "[ 7 Zapisz         ]\n";
     std::cout << "[ 8 Autosave       ]\n";
     std::cout << "[ 9 Statystyki     ]\n";
+    std::cout << "[ (U) Usuń wpis    ]\n";
     std::cout << "[ (E) Edytuj wpis  ]\n";
     std::cout << "[ (Z) Cofnij       ]\n";
     std::cout << "[ (X) Exit         ]\n";
     std::cout << "[------------------]\n";
 }
+
 void Program::AppManager::showAllStats() {
 
 }
@@ -42,18 +44,30 @@ void Program::AppManager::preLoad() {
     this->manager->load("saves/preCars.txt", "saves/preLogs.txt");
 }
 
-
-
-
-
-
-
+void Program::AppManager::removeLogOption() {
+    CLEAR;
+    Program::Wpis* pickedLog = Program::Wpis::logPicker(this->manager->getAllLogs());
+    if (pickedLog == nullptr || !pickedLog) {
+        CLEAR;
+        std::cout << "Nie znaleziono wpisu! Kod błędu: RLO-1\n";
+        return;
+    }
+    CLEAR;
+    char opt;
+    std::cout << "Czy na pewno chcesz usunac wpis z dnia " << std::ctime(&pickedLog->timestamp) << "? (Y/N)";
+    std::cin >> opt;
+    if (opt != 'Y') {
+        std::cout << "Anulowanie.\n";
+        return;
+    }
+    this->manager->removeLog(pickedLog->id);
+}
 void Program::AppManager::editLog() {
     CLEAR;
     Program::Wpis* pickedLog = Program::Wpis::logPicker(this->manager->getAllLogs());
     if (pickedLog == nullptr || !pickedLog) {
         CLEAR;
-        std::cout << "Nie znaleziono wpisu! Kod błędu: EL-1";
+        std::cout << "Nie znaleziono wpisu! Kod błędu: EL-1\n";
         return;
     }
     CLEAR;
@@ -110,7 +124,8 @@ void Program::AppManager::showStatsOption() {
     std::cout << "Ogolne wydatki: " << StatsCalculator::calculateAllTimeExpenses(&logs) <<'\n';
     std::cout << "Miesieczne wydatki: " << StatsCalculator::calculateMonthlyExpenses(logs) << '\n'; 
     std::cout << "Spalanie: " << StatsCalculator::fuelUsage(&logs, pickedCar) << "L/100km\n";
-
+    std::cout << "Średnia cena paliwa: " << StatsCalculator::averageFuelPrice(&logs) << "/Litr\n";
+    std::cout << "Koszt na kilometr: " << StatsCalculator::pricePerKilometer(&logs) << "\n";
 }
 void Program::AppManager::addCarOption() {
     CLEAR;
@@ -163,7 +178,6 @@ void Program::AppManager::addLogOption() {
     CLEAR;
     Program::Wpis newLog;
     newLog.id = 0;
-    // fixed segfault
     Program::Auto* pickedCar = Program::Auto::carPicker(this->manager->getAllCars());
 
     if (pickedCar == nullptr || !pickedCar) {

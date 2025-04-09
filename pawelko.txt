@@ -35,7 +35,7 @@ void dodajAuto(Auto auta[], int& liczbaAut); T
 void dodajWpis(Wpis wpisy[], int& liczbaWpisow, const Auto auta[], int liczbaAut); T
 
 void edytujWpis(Wpis wpisy[], int liczbaWpisow); T
-void usunWpis(Wpis wpisy[], int& liczbaWpisow, int indeks); // TODO: zaimplementowac
+void usunWpis(Wpis wpisy[], int& liczbaWpisow, int indeks); 
 void usunAuto(Auto auta[], int& liczbaAut, int id); T
 
 2. Funkcje dodatkowe
@@ -51,8 +51,8 @@ void wyszukajWpisPoDacie(...) // TODO: wyszukiwanie auta 1/2
 
 IV. Obliczenia i statystyki
 
-float obliczSredniaCenePaliwa(const Wpis wpisy[], int liczbaWpisow); // TODO: srednia cena paliwa
-float obliczKosztNaKilometr(const Wpis wpisy[], int liczbaWpisow); // TODO: koszt na kilometr
+float obliczSredniaCenePaliwa(const Wpis wpisy[], int liczbaWpisow); T
+float obliczKosztNaKilometr(const Wpis wpisy[], int liczbaWpisow); T
 float obliczMiesieczneWydatki(const Wpis wpisy[], int liczbaWpisow, long int timestamp_start, long int timestamp_end); T
 
 V. Mechanizm cofania zmian i autosave T
