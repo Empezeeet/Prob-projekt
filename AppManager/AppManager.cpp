@@ -34,11 +34,12 @@ void Program::AppManager::showAllStats() {
 
 }
 void Program::AppManager::preSave() {
-    CLEAR;
-    this->manager
+    this->manager->save("saves/preCars.txt", "saves/preLogs.txt");
 }
 void Program::AppManager::preLoad() {
     CLEAR;
+    std::cout << "Cofnieto zmiane!\n";
+    this->manager->load("saves/preCars.txt", "saves/preLogs.txt");
 }
 
 
@@ -174,6 +175,7 @@ void Program::AppManager::addLogOption() {
     
     std::cout << "Wybrano auto: " << pickedCar->nazwa << "\n";
     newLog.auto_id = pickedCar->id;
+    std::cout << "Ostatni przebieg: " << pickedCar->przebieg << "\n";
     // przebieg
     do {
         std::cout << "Podaj aktualny przebieg w kilometrach: ";

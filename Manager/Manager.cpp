@@ -28,7 +28,7 @@ int Program::Manager::generateID(Program::Auto* car) {
     return 0;
 }
 int Program::Manager::generateID(Program::Wpis* log) {
-    log->id = log->przebieg + ((std::rang()%9999)+1000);
+    log->id = log->przebieg + ((std::rand()%9999)+1000);
     return 0;
 }
 int Program::Manager::addCar(Program::Auto car) {
@@ -85,9 +85,15 @@ int Program::Manager::addLog(Wpis log)
     this->autoSave();
     return 0;
 }
-int Program::Manager::removeLog(int logID)
-{
-    // TODO: remove log
+int Program::Manager::removeLog(int logID) {
+    for (Program::Wpis& log : this->_logs) {
+        if (log.id==logID) {
+            log = {};
+            break;
+        }
+    }
+    this->defragmentation();
+    this->autoSave();
     return 0;
 }
 void Program::Manager::toggleAutosave() {
@@ -101,7 +107,7 @@ void Program::Manager::printCars()
         return;
     }
     std::cout << "|-------------\n";
-    for (const auto& car : this->_cars) {
+    for (const Program::Auto& car : this->_cars) {
         if (car.id == 0) {
             continue;
         }
@@ -119,7 +125,7 @@ void Program::Manager::printLogs()
         return;
     }
     std::cout << "|-------------\n";
-    for (const auto& log : this->_logs) {
+    for (const Program::Wpis& log : this->_logs) {
         if (log.id == 0 ) continue;
         std::cout << "[ DATA WPISU: " << std::ctime(&log.timestamp) << "\t\n";
         std::cout << "[ NAZWA AUTA: " << this->findCar(log.auto_id)->nazwa << "\t\n";

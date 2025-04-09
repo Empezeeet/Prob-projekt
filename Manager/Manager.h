@@ -135,7 +135,7 @@ namespace Program {
         void printLogs();
         int save(std::string pathCar = carSaveFilePath, std::string pathLog = logSaveFilePath);
         int load(std::string pathCar = carSaveFilePath, std::string pathLog = logSaveFilePath);
-        int generateID(Program::Car* car);
+        int generateID(Program::Auto* car);
         int generateID(Program::Wpis* log);
 
 

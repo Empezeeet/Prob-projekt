@@ -14,12 +14,15 @@ int main()
 
         switch (opt) {
         case '1':
+            app->preSave();
             app->addCarOption();
             break;
         case '2':
+            app->preSave();
             app->removeCarOption();
             break;
         case '3': 
+            app->preSave();
             app->addLogOption();
             break;
         case '4': 
@@ -30,6 +33,7 @@ int main()
             break;
         }
         case '6': { // load
+            app->preSave();
             app->loadOption();
             break;
         }
@@ -46,11 +50,13 @@ int main()
             break;
         }
         case 'E': {
+            app->preSave();
             app->editLog();
             break;
         }
         case 'Z': { // revert last change.
             // TODO: add CTRL-Z option;
+            app->preLoad();
             break;
         }
         case 'X': { // exit
