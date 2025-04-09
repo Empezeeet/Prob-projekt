@@ -2,30 +2,27 @@
 
 int main()
 {
-
     Program::AppManager* app = new Program::AppManager();
     char opt;
-    
     
     do  {
         app->displayMenu();
         std::cin >> opt;
 
-
         switch (opt) {
-        case '1':
+        case '1': // add car
             app->preSave();
             app->addCarOption();
             break;
-        case '2':
+        case '2': // remove car
             app->preSave();
             app->removeCarOption();
             break;
-        case '3': 
+        case '3': // add log
             app->preSave();
             app->addLogOption();
             break;
-        case '4': 
+        case '4': // print all cars.
             app->showAllCars();
             break;
         case '5': // print all fuel logs
@@ -59,11 +56,7 @@ int main()
             app->exitOption(&opt);
         }
 
-
-
     } while (opt != 'X');
-
-
 
     delete app;    
     return 0;

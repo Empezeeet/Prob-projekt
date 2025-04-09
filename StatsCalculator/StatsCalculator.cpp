@@ -49,5 +49,3 @@ float Program::StatsCalculator::pricePerKilometer(LogArray* logs) {
     if (distance == 0) return 0;
     return moneySum/distance;
 }
-
-
