@@ -131,6 +131,68 @@ void Program::AppManager::showStatsOption() {
 }
 void Program::AppManager::selectSortingOption() {
     // TODO: sorting    
+    CLEAR;
+    std::cout << "[ ---- SORTOWANIE --- ]\n";
+    std::cout << "[ 1. Po cenie         ]\n";
+    std::cout << "[ 2. Po dacie         ]\n";
+    std::cout << "[ 3. Po ilości        ]\n";
+    int opt;
+    do {
+        std::cout << "Wybierz: ";
+        std::cin >> opt;
+    } while (opt < 1 || opt > 3);
+    Program::LogArray logs = this->manager->getAllLogsCopy();
+    CLEAR;
+    // rosnąco.
+    switch (opt) {
+        case 1: {// cena
+            for (int i=0; i<63; i++) {
+                for (int j=0; j<63-i; j++) {
+                    if (logs.at(j).id == 0 || logs.at(j+1).id == 0) continue; 
+                    if (logs.at(j).cena > logs.at(j+1).cena) {
+                        std::swap(logs.at(j), logs.at(j+1));
+                    }
+                }
+            }
+            break;
+        } 
+        case 2: {// data
+            for (int i=0; i<63; i++) {
+                for (int j=0; j<63-i; j++) {
+                    if (logs.at(j).id == 0 || logs.at(j+1).id == 0) continue; 
+                    if (logs.at(j).timestamp > logs.at(j+1).timestamp) {
+                        std::swap(logs.at(j), logs.at(j+1));
+                    }
+                }
+            }
+            break;
+        }
+        case 3: {// ilość
+            for (int i=0; i<63; i++) {
+                for (int j=0; j<63-i; j++) {
+                    if (logs.at(j).id == 0 || logs.at(j+1).id == 0) continue; 
+                    if (logs.at(j).ilosc > logs.at(j+1).ilosc) {
+                        std::swap(logs.at(j), logs.at(j+1));
+                    }
+                }
+            }
+            break;
+        }
+    }
+    // TODO: display all logs.
+    std::cout << "|-------------\n";
+
+    for (Program::Wpis log : logs) {
+        if (log.id == 0) continue;
+        std::cout << "[ DATA WPISU: " << std::ctime(&log.timestamp) << ""; // FIXME: time is off by 3h
+        std::cout << "[ NAZWA AUTA: " << this->manager->findCar(log.auto_id)->nazwa << "\n";
+        std::cout << "[ Ilosc: " << log.ilosc << "\n";
+        std::cout << "[ Cena: " << log.cena << "\n";
+        std::cout << "[ PRZEBIEG: " << log.przebieg << "\n";
+        std::cout << "|-------------\n";
+    }
+
+    
 }
 void Program::AppManager::search() {
     CLEAR;
