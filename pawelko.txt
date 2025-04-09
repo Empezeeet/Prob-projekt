@@ -41,16 +41,16 @@ void usunAuto(Auto auta[], int& liczbaAut, int id); T
 2. Funkcje dodatkowe
 void wyswietlAuta(...) T
 void wyswietlWpisy(...) T
-    // ???
-    void sortujAutaPoNazwie(...) // TODO: wyswietlanie po nazwie
-    void sortujAutaPoPrzebiegu(...) // TODO: wyswietlanie po sortowaniu.
+    // ??? 
+    void sortujAutaPoNazwie(...)    // T(O)DO: wyswietlanie po nazwie
+    void sortujAutaPoPrzebiegu(...) // T(O)DO: wyswietlanie po sortowaniu.
 
 void sortujWpisyPoCenie(...) // TODO: wyswietlanie po sortowaniu. 
 void sortujWpisyPoDacie(...) // TODO: wyswietlanie po sortowaniu.
 void sortujWpisyPoIlosci(...) // TODO: wyswietlanie po sortowaniu.
 
-void wyszukajAutoPoNazwie(...) // TODO: wyszukiwanie auta po nazwie 1/2
-void wyszukajWpisPoDacie(...) // TODO: wyszukiwanie auta po dacie 
+void wyszukajAutoPoNazwie(...) T
+void wyszukajWpisPoDacie(...) T
 
 IV. Obliczenia i statystyki
 

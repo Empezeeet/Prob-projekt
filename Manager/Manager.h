@@ -61,6 +61,7 @@ namespace Program {
         Program::Auto* findCar(int carID);
         Program::Auto* findCar(std::string name);
         Program::Wpis* findLog(int logID);
+        Program::Wpis* findLog(std::time_t timestamp);
         int addCar(Auto car);
         int removeCar(int carID);
         int removeCar(std::string name);
@@ -72,7 +73,7 @@ namespace Program {
         int load(std::string pathCar = carSaveFilePath, std::string pathLog = logSaveFilePath);
         int generateID(Program::Auto* car);
         int generateID(Program::Wpis* log);
-
+        
 
         void test();
         void calculateStats();

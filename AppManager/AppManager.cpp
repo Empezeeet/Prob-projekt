@@ -25,6 +25,8 @@ void Program::AppManager::displayMenu() {
     std::cout << "[ 7 Zapisz         ]\n";
     std::cout << "[ 8 Autosave       ]\n";
     std::cout << "[ 9 Statystyki     ]\n";
+    std::cout << "[ (S) Szukaj       ]\n";
+    std::cout << "[ (V) Sortuj wpisy ]\n";
     std::cout << "[ (U) Usuń wpis    ]\n";
     std::cout << "[ (E) Edytuj wpis  ]\n";
     std::cout << "[ (Z) Cofnij       ]\n";
@@ -126,6 +128,76 @@ void Program::AppManager::showStatsOption() {
     std::cout << "Spalanie: " << StatsCalculator::fuelUsage(&logs, pickedCar) << "L/100km\n";
     std::cout << "Średnia cena paliwa: " << StatsCalculator::averageFuelPrice(&logs) << "/Litr\n";
     std::cout << "Koszt na kilometr: " << StatsCalculator::pricePerKilometer(&logs) << "\n";
+}
+void Program::AppManager::selectSortingOption() {
+    // TODO: sorting    
+}
+void Program::AppManager::search() {
+    CLEAR;
+    std::cout << "[ ---- WYSZUKIWANIE ---- ]\n";
+    std::cout << "[ 1. Auta po nazwie      ]\n";
+    std::cout << "[ 2. Wpisu po dacie      ]\n";
+    std::cout << "[ 3. Wróć                ]\n";
+
+    int opt;
+    do {
+        std::cout << "Wybierz: ";
+        std::cin >> opt;
+    } while (opt < 1 || opt > 3);
+    std::string carName;
+    struct tm datetime;
+    std::time_t timestamp;
+    switch (opt) {
+        case 1: {
+            std::cout << "Podaj nazwę auta: ";
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::getline(std::cin, carName);
+            Program::Auto* car = this->manager->findCar(carName);
+            if (car == nullptr) {
+                std::cout << "Nie znaleziono auta!\n";
+                return;
+            }
+            std::cout << "[ AUTO: " << car->nazwa << "\n";
+            std::cout << "[ PRZEBIEG: " << car->przebieg << "km\n";
+            std::cout << "[ ID: " << car->id << "\t\n";
+            std::cout << "[ ------------------]\n";
+            break;
+        }
+        case 2: {
+            std::cout << "Podaj rok: "; 
+                std::cin >> datetime.tm_year;
+            std::cout << "Podaj miesiac: "; 
+                std::cin >> datetime.tm_mon;
+            std::cout << "Podaj dzien: "; 
+                std::cin >> datetime.tm_mday;
+            // set hour minute and second to 0
+            datetime.tm_hour = 0; datetime.tm_min = 0; datetime.tm_sec = 0;
+            // 
+            datetime.tm_year -= 1900;
+            datetime.tm_mon -= 1;
+            datetime.tm_isdst = -1;
+            timestamp = std::mktime(&datetime);
+            CLEAR;
+            Program::Wpis* log = this->manager->findLog(timestamp);
+            if (log == nullptr) {
+                std::cout << "Brak takiego wpisu!\n";
+                return;
+            }
+            std::cout << "|-------------\n";
+            std::cout << "[ DATA WPISU: " << std::ctime(&log->timestamp) << "";
+            std::cout << "[ NAZWA AUTA: " << this->manager->findCar(log->auto_id)->nazwa << "\n"; // FIXME: time is off by 3h
+            std::cout << "[ Ilosc: " << log->ilosc << "\n";
+            std::cout << "[ Cena: " << log->cena << "\n";
+            std::cout << "[ PRZEBIEG: " << log->przebieg << "\n";
+            std::cout << "|-------------\n";
+
+
+            break;
+        }
+    }
+
+    
 }
 void Program::AppManager::addCarOption() {
     CLEAR;

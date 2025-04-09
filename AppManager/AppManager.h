@@ -20,8 +20,10 @@ namespace Program {
             void removeCarOption();
             void addLogOption();
             void removeLogOption();
+            void selectSortingOption();
             void loadOption();
             void saveOption();
+            void search();
             void exitOption(char* opt);
             void showAllCars();
             void showAllLogs();

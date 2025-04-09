@@ -41,6 +41,12 @@ int main()
         case '9': // show stats;
             app->showStatsOption();
             break;
+        case 'V': // sort 
+            app->selectSortingOption();
+            break;
+        case 'S': // search
+            app->search();
+            break;
         case 'U': // remove log
             app->preSave();
             app->removeLogOption();

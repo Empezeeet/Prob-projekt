@@ -111,16 +111,31 @@ void Program::Manager::printCars()
         std::cout << "Brak aut w bazie\n";
         return;
     }
-    std::cout << "|-------------\n";
+    std::cout << "[ ------------------]\n";
     for (const Program::Auto& car : this->_cars) {
         if (car.id == 0) {
             continue;
         }
-        std::cout << "| AUTO: " << car.nazwa << "\t\n";
-        std::cout << "| PRZEBIEG: " << car.przebieg << "km\t\n";
-        std::cout << "| ID: " << car.id << "\t\n";
-        std::cout << "|-------------\n";
+        std::cout << "[ AUTO: " << car.nazwa << "\n";
+        std::cout << "[ PRZEBIEG: " << car.przebieg << "km\n";
+        std::cout << "[ ID: " << car.id << "\t\n";
+        std::cout << "[ ------------------]\n";
     }
+}
+Program::Wpis* Program::Manager::findLog(std::time_t timestamp) {
+    struct tm* datetime;
+    for (Program::Wpis log : this->_logs) {
+        datetime = std::localtime(&log.timestamp);
+        if (datetime == nullptr) continue;
+        datetime->tm_hour = 0;
+        datetime->tm_min = 0;
+        datetime->tm_sec = 0;
+        if (mktime(datetime) == timestamp) {
+            return this->findLog(log.id);
+        }
+
+    }
+    return nullptr;
 }
 void Program::Manager::printLogs()
 {
@@ -132,7 +147,7 @@ void Program::Manager::printLogs()
     std::cout << "|-------------\n";
     for (const Program::Wpis& log : this->_logs) {
         if (log.id == 0 ) continue;
-        std::cout << "[ DATA WPISU: " << std::ctime(&log.timestamp) << "";
+        std::cout << "[ DATA WPISU: " << std::ctime(&log.timestamp) << ""; // FIXME: time is off by 3h
         std::cout << "[ NAZWA AUTA: " << this->findCar(log.auto_id)->nazwa << "\n";
         std::cout << "[ Ilosc: " << log.ilosc << "\n";
         std::cout << "[ Cena: " << log.cena << "\n";
