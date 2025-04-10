@@ -130,7 +130,6 @@ void Program::AppManager::showStatsOption() {
     std::cout << "Koszt na kilometr: " << StatsCalculator::pricePerKilometer(&logs) << "\n";
 }
 void Program::AppManager::selectSortingOption() {
-    // TODO: sorting    
     CLEAR;
     std::cout << "[ ---- SORTOWANIE --- ]\n";
     std::cout << "[ 1. Po cenie         ]\n";
@@ -179,7 +178,6 @@ void Program::AppManager::selectSortingOption() {
             break;
         }
     }
-    // TODO: display all logs.
     std::cout << "|-------------\n";
 
     for (Program::Wpis log : logs) {
