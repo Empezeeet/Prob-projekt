@@ -86,9 +86,17 @@ int Program::Manager::addLog(Wpis log)
     this->generateID(&log);
     if (this->_logCount == 0) log.previousPrzebieg = 0;
 
+
+    Program::Auto* pickedCar = this->findCar(log.auto_id);
+    if (pickedCar == nullptr) {
+        std::cout << "nie znaleziono auta!\n";
+        return -2;
+    }
+    std::cout << "set prv przebieg to: " << pickedCar->przebieg << "\n";
+    log.previousPrzebieg = pickedCar->przebieg;
+    pickedCar->przebieg = log.przebieg;
     this->_logs[this->_logCount++] = log;
-    log.previousPrzebieg = this->findCar(log.auto_id)->przebieg;
-    this->findCar(log.auto_id)->przebieg = log.przebieg;
+
     this->defragmentation();
     this->autoSave();
     return 0;
@@ -272,6 +280,16 @@ int Program::Manager::load(std::string pathCar, std::string pathLog)
     this->_logs.fill({});
     Program::Wpis log;
     count = 0;
+    /*
+    file2 << log.id 
+            << " " << log.auto_id 
+            << " " << log.cena 
+            << " " << log.ilosc 
+            << " " << log.przebieg 
+            << " " << (long long)log.timestamp 
+            << " " << log.previousPrzebieg << "\n";
+    
+    */
     while (!logFile.eof()) {
         logFile >> log.id;
         logFile >> log.auto_id;

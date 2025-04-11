@@ -2,6 +2,7 @@
 #define ISELECTABLE_H
 #include <string>
 namespace Program {
+    // if it ain't broke don't fix it.
     class ISelectable {
         public:
             virtual int getID() const = 0;

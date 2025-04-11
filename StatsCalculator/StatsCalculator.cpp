@@ -21,13 +21,17 @@ float Program::StatsCalculator::calculateMonthlyExpenses(Program::LogArray logs)
     return sum;
 }
 float Program::StatsCalculator::averageFuelPrice(LogArray* logs) {
-    float sum = 0;
+    float sum = 0; 
     int count = 0;
 
-    for (; count<logs->size(); count++) 
-        sum += logs->at(count).cena / logs->at(count).ilosc;
+    for (int i=0; i<logs->size()-1; i++) {
+        if (logs->at(i).id == 0) continue;
+        sum += logs->at(i).cena / logs->at(i).ilosc;
+        count++;
+    }
+
     
-    if (count == 0) return 0;
+    if (count == 0) return -1;
     return sum/count;
 }
 float Program::StatsCalculator::fuelUsage(LogArray* logs, Program::Auto* car) {
@@ -40,12 +44,18 @@ float Program::StatsCalculator::fuelUsage(LogArray* logs, Program::Auto* car) {
     return (ilosc)/(car->przebieg)*100;
 }
 float Program::StatsCalculator::pricePerKilometer(LogArray* logs) { 
-    float moneySum = 0;
+    std::cout << '\n';
+    float moneySum = 0; // FIXME: wrong. returns really small amount;
     float distance = 0;
     for (int i=0; i<logs->size(); i++) {
+        if (logs->at(i).id == 0) continue;
+        std::cout << "cena: " << logs->at(i).cena << '\n';
         moneySum += logs->at(i).cena;
+        std::cout << "+dst: " << logs->at(i).przebieg - logs->at(i).previousPrzebieg << "\n";
         distance += logs->at(i).przebieg - logs->at(i).previousPrzebieg;
     }
+    std::cout << "MS: " << moneySum << "\n";
+    std::cout << "dst: " << distance << "\n";
     if (distance == 0) return 0;
     return moneySum/distance;
 }
