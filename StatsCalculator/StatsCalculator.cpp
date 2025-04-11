@@ -44,18 +44,14 @@ float Program::StatsCalculator::fuelUsage(LogArray* logs, Program::Auto* car) {
     return (ilosc)/(car->przebieg)*100;
 }
 float Program::StatsCalculator::pricePerKilometer(LogArray* logs) { 
-    std::cout << '\n';
-    float moneySum = 0; // FIXME: wrong. returns really small amount;
+    float moneySum = 0;
     float distance = 0;
     for (int i=0; i<logs->size(); i++) {
         if (logs->at(i).id == 0) continue;
-        std::cout << "cena: " << logs->at(i).cena << '\n';
         moneySum += logs->at(i).cena;
-        std::cout << "+dst: " << logs->at(i).przebieg - logs->at(i).previousPrzebieg << "\n";
         distance += logs->at(i).przebieg - logs->at(i).previousPrzebieg;
     }
-    std::cout << "MS: " << moneySum << "\n";
-    std::cout << "dst: " << distance << "\n";
+
     if (distance == 0) return 0;
     return moneySum/distance;
 }

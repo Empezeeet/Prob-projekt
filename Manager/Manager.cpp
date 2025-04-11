@@ -92,7 +92,6 @@ int Program::Manager::addLog(Wpis log)
         std::cout << "nie znaleziono auta!\n";
         return -2;
     }
-    std::cout << "set prv przebieg to: " << pickedCar->przebieg << "\n";
     log.previousPrzebieg = pickedCar->przebieg;
     pickedCar->przebieg = log.przebieg;
     this->_logs[this->_logCount++] = log;
