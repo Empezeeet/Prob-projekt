@@ -3,7 +3,7 @@
 #include <array>
 #include <string>
 #include <vector>
-#include "../../Utils/selector.h" 
+#include "../../Components/Selector/selector.h" 
 namespace Program {
     struct Auto : public ISelectable {
         int id;

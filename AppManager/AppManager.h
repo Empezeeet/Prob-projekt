@@ -1,7 +1,7 @@
 #ifndef APPMANAGER_H
 #define APPMANAGER_H
 #include "../Manager/Manager.h"
-#include "../Utils/selector.h"
+#include "../Components/Selector/selector.h"
 #include "../StatsCalculator/StatsCalculator.h"
 #include <iostream>
 #include <ctime>
@@ -33,6 +33,7 @@ namespace Program {
             void editLog();
             void preSave();
             void preLoad();
+            void csvExportOption();
 
 
 

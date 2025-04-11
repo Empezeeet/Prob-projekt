@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 #include <ctime>
-#include "../../Utils/selector.h" 
+#include "../../Components/Selector/selector.h" 
 
 namespace Program {
     struct Wpis : public ISelectable {
