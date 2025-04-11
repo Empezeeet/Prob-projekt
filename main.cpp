@@ -1,5 +1,5 @@
 #include "AppManager/AppManager.h"
-
+// TODO: refactor.
 int main()
 {
     Program::AppManager* app = new Program::AppManager();
