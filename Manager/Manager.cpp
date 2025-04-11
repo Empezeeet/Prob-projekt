@@ -147,7 +147,7 @@ void Program::Manager::printLogs()
     std::cout << "|-------------\n";
     for (const Program::Wpis& log : this->_logs) {
         if (log.id == 0 ) continue;
-        std::cout << "[ DATA WPISU: " << std::ctime(&log.timestamp) << ""; // FIXME: time is off by 3h
+        std::cout << "[ DATA WPISU: " << Program::Time::timestampToString(log.timestamp) << "";
         std::cout << "[ NAZWA AUTA: " << this->findCar(log.auto_id)->nazwa << "\n";
         std::cout << "[ Ilosc: " << log.ilosc << "\n";
         std::cout << "[ Cena: " << log.cena << "\n";

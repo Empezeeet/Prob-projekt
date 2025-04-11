@@ -56,7 +56,7 @@ void Program::AppManager::removeLogOption() {
     }
     CLEAR;
     char opt;
-    std::cout << "Czy na pewno chcesz usunac wpis z dnia " << std::ctime(&pickedLog->timestamp) << "? (Y/N)";
+    std::cout << "Czy na pewno chcesz usunac wpis z dnia " << Program::Time::timestampToString(pickedLog->timestamp) << "? (Y/N)";
     std::cin >> opt;
     if (opt != 'Y') {
         std::cout << "Anulowanie.\n";
@@ -182,7 +182,7 @@ void Program::AppManager::selectSortingOption() {
 
     for (Program::Wpis log : logs) {
         if (log.id == 0) continue;
-        std::cout << "[ DATA WPISU: " << std::ctime(&log.timestamp) << ""; // FIXME: time is off by 3h
+        std::cout << "[ DATA WPISU: " << Program::Time::timestampToString(log.timestamp) << "";
         std::cout << "[ NAZWA AUTA: " << this->manager->findCar(log.auto_id)->nazwa << "\n";
         std::cout << "[ Ilosc: " << log.ilosc << "\n";
         std::cout << "[ Cena: " << log.cena << "\n";
@@ -205,7 +205,7 @@ void Program::AppManager::search() {
         std::cin >> opt;
     } while (opt < 1 || opt > 3);
     std::string carName;
-    struct tm datetime;
+    int year, month, day;
     std::time_t timestamp;
     switch (opt) {
         case 1: {
@@ -226,18 +226,13 @@ void Program::AppManager::search() {
         }
         case 2: {
             std::cout << "Podaj rok: "; 
-                std::cin >> datetime.tm_year;
+                std::cin >> year;
             std::cout << "Podaj miesiac: "; 
-                std::cin >> datetime.tm_mon;
+                std::cin >> month;
             std::cout << "Podaj dzien: "; 
-                std::cin >> datetime.tm_mday;
-            // set hour minute and second to 0
-            datetime.tm_hour = 0; datetime.tm_min = 0; datetime.tm_sec = 0;
-            // 
-            datetime.tm_year -= 1900;
-            datetime.tm_mon -= 1;
-            datetime.tm_isdst = -1;
-            timestamp = std::mktime(&datetime);
+                std::cin >> day;    
+            timestamp = Program::Time::datetimeToTimestamp(Program::Time::createDatetime(year, month, day));
+
             CLEAR;
             Program::Wpis* log = this->manager->findLog(timestamp);
             if (log == nullptr) {
@@ -245,8 +240,8 @@ void Program::AppManager::search() {
                 return;
             }
             std::cout << "|-------------\n";
-            std::cout << "[ DATA WPISU: " << std::ctime(&log->timestamp) << "";
-            std::cout << "[ NAZWA AUTA: " << this->manager->findCar(log->auto_id)->nazwa << "\n"; // FIXME: time is off by 3h
+            std::cout << "[ DATA WPISU: " << Program::Time::timestampToString(log->timestamp) << "";
+            std::cout << "[ NAZWA AUTA: " << this->manager->findCar(log->auto_id)->nazwa << "\n"; 
             std::cout << "[ Ilosc: " << log->ilosc << "\n";
             std::cout << "[ Cena: " << log->cena << "\n";
             std::cout << "[ PRZEBIEG: " << log->przebieg << "\n";
@@ -338,7 +333,7 @@ void Program::AppManager::addLogOption() {
         std::cout << "Podaj cene tankowania: ";
         std::cin >> newLog.cena;
     } while (newLog.cena < 0);
-    newLog.timestamp = std::time(NULL);
+    newLog.timestamp = Program::Time::Now(); 
     this->manager->addLog(newLog);
 }
 void Program::AppManager::loadOption() {

@@ -7,9 +7,8 @@ float Program::StatsCalculator::calculateAllTimeExpenses(Program::LogArray* logs
     return sum; 
 }
 float Program::StatsCalculator::calculateMonthlyExpenses(Program::LogArray logs) {
-    std::time_t currentTimestamp;
-    std::time(&currentTimestamp);
-    std::tm* currentTime = std::localtime(&currentTimestamp);
+
+    std::tm* currentTime = &Program::Time::createDatetimeNow();
     std::tm* logTime;
     float sum = 0;
     for (Program::Wpis log : logs) {
