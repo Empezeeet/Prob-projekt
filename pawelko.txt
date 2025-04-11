@@ -113,4 +113,4 @@ poprawność obliczeń dla średniej ceny i kosztu/km T
 zapis i odczyt danych T
 
 IX. Możliwości dalszego rozwoju
-eksport danych do CSV (dla arkuszy kalkulacyjnych) // TODO: export to CSV
+eksport danych do CSV (dla arkuszy kalkulacyjnych) T

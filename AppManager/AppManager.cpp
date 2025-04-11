@@ -29,11 +29,53 @@ void Program::AppManager::displayMenu() {
     std::cout << "[ (V) Sortuj wpisy ]\n";
     std::cout << "[ (U) Usuń wpis    ]\n";
     std::cout << "[ (E) Edytuj wpis  ]\n";
+    std::cout << "[ (C) CSV Export   ]\n";
     std::cout << "[ (Z) Cofnij       ]\n";
     std::cout << "[ (X) Exit         ]\n";
     std::cout << "[------------------]\n";
 }
+void Program::AppManager::csvExportOption() {
+    CLEAR;
+    // 1. file format:
+    //      cars.csv:
+    //          car_id, car_name, car_mileage
+    //      logs.csv
+    //          log_id, car_id, prevMileage, mileage, price, amount, timestamp
+    std::ofstream carsFile("carExport.csv");
+    if (!carsFile) {
+        // error
+        std::cout << "ERR_EXPORT_CAR-1";
+        return;
+    }
+    for (Program::Auto car : this->manager->getAllCarsCopy()) {
+        if (car.id == 0) continue;
+        carsFile << car.id << ","
+            << car.nazwa << ","
+            << car.przebieg << "\n";
+    }
+    carsFile.close();
+    std::ofstream logFile("logExport.csv");
+    if (!logFile) {
+        // error
+        std::cout << "ERR_EXPORT_LOG-2";
+        return;
+    }
+    for (Program::Wpis log : this->manager->getAllLogsCopy()) {
+        if (log.id == 0) continue;
+        logFile << log.id << ","
+            << log.auto_id << ","
+            << log.previousPrzebieg << ","
+            << log.przebieg << ","
+            << log.cena << ","
+            << log.ilosc << ","
+            << log.timestamp << "\n";
+    }
+    logFile.close();
+    std::cout << "Wyeksportowano pomyślnie!\n";
 
+
+
+}
 void Program::AppManager::showAllStats() {
 
 }

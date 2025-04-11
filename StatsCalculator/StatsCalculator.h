@@ -10,8 +10,8 @@ namespace Program {
         static float calculateAllTimeExpenses(LogArray* logs);
         static float calculateMonthlyExpenses(LogArray logs);
         static float fuelUsage(LogArray* logs, Program::Auto* car);
-        static float averageFuelPrice(LogArray* logs);
-        static float pricePerKilometer(LogArray* logs);
+        static float averageFuelPrice(LogArray* logs); // FIXME: wrong. return -nan
+        static float pricePerKilometer(LogArray* logs); // FIXME: wrong. returns really small amount;
     };
 }
 #endif

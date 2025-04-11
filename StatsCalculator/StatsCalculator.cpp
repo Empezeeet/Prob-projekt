@@ -8,12 +8,13 @@ float Program::StatsCalculator::calculateAllTimeExpenses(Program::LogArray* logs
 }
 float Program::StatsCalculator::calculateMonthlyExpenses(Program::LogArray logs) {
 
-    std::tm* currentTime = &Program::Time::createDatetimeNow();
+    
+    std::tm currentTime = Program::Time::createDatetimeNow();
     std::tm* logTime;
     float sum = 0;
     for (Program::Wpis log : logs) {
         logTime = std::localtime(&log.timestamp);
-        if (logTime->tm_year+1900 != currentTime->tm_year+1900 || logTime->tm_mon+1 != currentTime->tm_mon+1)
+        if (logTime->tm_year+1900 != currentTime.tm_year+1900 || logTime->tm_mon+1 != currentTime.tm_mon+1)
             continue;
         sum += log.cena;
     }

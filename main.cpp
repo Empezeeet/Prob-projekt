@@ -55,6 +55,9 @@ int main()
             app->preSave();
             app->editLog();
             break;
+        case 'C':
+            app->csvExportOption();
+            break;
         case 'Z': // revert last change.
             app->preLoad();
             break;
