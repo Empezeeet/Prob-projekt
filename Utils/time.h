@@ -8,8 +8,6 @@ namespace Program {
     namespace Time {
         // function datetime to timestamp
         std::time_t datetimeToTimestamp(std::tm datetime);
-        // function timestamp to date
-        std::tm timestampToDate(std::time_t timestamp);
         // function create datetime
         std::tm createDatetimeNow();
         std::tm createDatetime(int year, int month, int day, int hour=0, int minute=0, int second=0);
